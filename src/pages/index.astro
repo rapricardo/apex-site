@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.tsx';
+import Thesis from '../components/Thesis.astro';
+import Diagnosis from '../components/Diagnosis.astro';
+import Process from '../components/Process.astro';
+import Authority from '../components/Authority.astro';
+---
+
+<Layout>
+  <div class="min-h-screen bg-apex-dark text-white">
+    <Hero client:load />
+    <Thesis />
+    <Diagnosis />
+    <Process />
+    <Authority />
+  </div>
+</Layout>
+

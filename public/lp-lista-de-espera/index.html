@@ -662,6 +662,8 @@
             <input type="hidden" name="gclid" id="h_gclid">
             <input type="hidden" name="gbraid" id="h_gbraid">
             <input type="hidden" name="wbraid" id="h_wbraid">
+            <input type="hidden" name="gad_campaignid" id="h_gad_campaignid">
+            <input type="hidden" name="gad_source" id="h_gad_source">
 
             <!-- Hidden: Meta / Facebook -->
             <input type="hidden" name="fbclid" id="h_fbclid">
@@ -681,6 +683,9 @@
             <input type="hidden" name="user_agent" id="h_user_agent">
             <input type="hidden" name="first_visit" id="h_first_visit">
             <input type="hidden" name="session_id" id="h_session_id">
+            <input type="hidden" name="session_attributes_encoded" id="h_session_attributes_encoded">
+            <input type="hidden" name="originPage" id="h_originPage">
+            <input type="hidden" name="ref" id="h_ref">
 
             <button type="submit" class="waitlist__submit" id="submit-btn">Garantir minha vaga &#8594;</button>
           </form>
@@ -734,9 +739,10 @@
       var STORAGE_KEY = '__wl_tracking';
       var urlParams = [
         'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
-        'gclid', 'gbraid', 'wbraid',
+        'gclid', 'gbraid', 'wbraid', 'gad_campaignid', 'gad_source',
         'fbclid',
-        'ttclid', 'msclkid', 'li_fat_id', 'twclid', 'sck'
+        'ttclid', 'msclkid', 'li_fat_id', 'twclid', 'sck',
+        'ref'
       ];
 
       // On first landing, capture everything and persist in sessionStorage
@@ -766,10 +772,16 @@
 
         // Session data
         stored.landing_page = window.location.href;
+        stored.originPage = window.location.href;
         stored.referrer = document.referrer || '';
         stored.user_agent = navigator.userAgent;
         stored.first_visit = new Date().toISOString();
         stored.session_id = generateSessionId();
+
+        // Session attributes encoded (all tracking params as base64)
+        var sessionAttrs = {};
+        urlParams.forEach(function(p) { if (stored[p]) sessionAttrs[p] = stored[p]; });
+        try { stored.session_attributes_encoded = btoa(JSON.stringify(sessionAttrs)); } catch(e) {}
 
         // Also check for Google Analytics / GA4 client ID cookie
         var gaCookie = getCookie('_ga');
@@ -782,10 +794,11 @@
       function populateHiddenFields() {
         var fields = [
           'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
-          'gclid', 'gbraid', 'wbraid',
+          'gclid', 'gbraid', 'wbraid', 'gad_campaignid', 'gad_source',
           'fbclid', 'fbc', 'fbp',
           'ttclid', 'msclkid', 'li_fat_id', 'twclid', 'sck',
-          'landing_page', 'referrer', 'user_agent', 'first_visit', 'session_id'
+          'landing_page', 'referrer', 'user_agent', 'first_visit', 'session_id',
+          'session_attributes_encoded', 'originPage', 'ref'
         ];
 
         fields.forEach(function(f) {

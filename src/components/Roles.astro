@@ -1,0 +1,23 @@
+---
+const roles = [
+  'Dono da Agência',
+  'Atendimento',
+  'Estrategista',
+  'Conteúdo',
+  'Designer',
+  'Tráfego',
+];
+---
+
+<section class="py-24 px-6 bg-black border-y border-gray-900">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl font-bold text-white mb-4">As 6 funções operando no mesmo sistema</h2>
+    <p class="text-gray-400 mb-12">Cada pessoa tem contexto, prioridade e apoio de IA no próprio fluxo de trabalho.</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {roles.map((r) => (
+        <div class="border border-gray-800 rounded-lg p-5 bg-gray-900/30 text-white font-medium">{r}</div>
+      ))}
+    </div>
+  </div>
+</section>

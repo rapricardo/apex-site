@@ -23,8 +23,8 @@ const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-          <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center h-14 px-8 font-semibold tracking-wide uppercase text-sm bg-apex-accent text-black hover:bg-emerald-400 rounded-sm transition-all">
-            Agendar Demo
+          <a href="#diagnostico" className="inline-flex items-center justify-center h-14 px-8 font-semibold tracking-wide uppercase text-sm bg-apex-accent text-black hover:bg-emerald-400 rounded-sm transition-all">
+            Fazer Diagnóstico Grátis
           </a>
           <a href="#como-funciona" className="inline-flex items-center justify-center h-14 px-8 font-semibold tracking-wide uppercase text-sm border border-gray-600 text-gray-200 hover:border-apex-accent hover:text-apex-accent rounded-sm transition-all">
             Como Funciona

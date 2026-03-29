@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.tsx';
 import Thesis from '../components/Thesis.astro';
+import DiagnosticQuiz from '../components/DiagnosticQuiz.tsx';
 import Diagnosis from '../components/Diagnosis.astro';
 import Process from '../components/Process.astro';
 import Authority from '../components/Authority.astro';
@@ -12,6 +13,7 @@ import Roles from '../components/Roles.astro';
   <div class="min-h-screen bg-apex-dark text-white">
     <Hero client:load />
     <Thesis />
+    <DiagnosticQuiz client:visible />
     <Diagnosis />
     <Process />
     <Roles />

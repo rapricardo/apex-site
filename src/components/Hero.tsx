@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
         </h1>
 
         <p className="text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-          Tu decides. A IA executa, organiza e sugere. Menos burocracia, mais throughput, mais qualidade por ciclo.
+          Você decide. A IA executa, organiza e sugere. Menos burocracia, mais throughput, mais qualidade por ciclo.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">

@@ -181,14 +181,6 @@
     .hero__cta:active { transform: translateY(0); }
 
     .hero__social-proof { margin-top: 32px; display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--text-muted); font-size: 15px; font-weight: 500; }
-    .hero__counter { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
-    .hero__avatars { display: flex; margin-right: 4px; }
-    .hero__avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--bg-primary); margin-left: -8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--bg-primary); }
-    .hero__avatar:first-child { margin-left: 0; }
-    .hero__avatar:nth-child(1) { background: #00E87B; }
-    .hero__avatar:nth-child(2) { background: #00B4D8; }
-    .hero__avatar:nth-child(3) { background: #7B61FF; }
-    .hero__avatar:nth-child(4) { background: #FF6B6B; }
 
     /* ========================================== */
     /* ===== PAIN SECTION — FULL REDESIGN ===== */
@@ -438,7 +430,6 @@
       .hero__subtitle { margin-bottom: 32px; }
       .hero__cta { padding: 14px 28px; font-size: 15px; }
       .hero__social-proof { font-size: 14px; gap: 10px; flex-wrap: wrap; justify-content: center; }
-      .hero__avatar { width: 28px; height: 28px; font-size: 11px; }
 
       .pain { padding: 60px 0; }
       .pain::before { width: 600px; height: 400px; }
@@ -495,7 +486,6 @@
       .hero { padding: 80px 0 48px; }
       .hero__badge { font-size: 11px; padding: 5px 12px; }
       .hero__social-proof { flex-direction: column; gap: 8px; }
-      .hero__avatars { margin-right: 0; }
 
       .pain__cards { gap: 16px; }
       .pain__card-inner { padding: 20px 16px; gap: 16px; }
@@ -544,10 +534,7 @@
         <a href="#waitlist" class="hero__cta">Quero entrar na fila &#8594;</a>
       </div>
       <div class="hero__social-proof fade-in fade-in-delay-3">
-        <div class="hero__avatars">
-          <div class="hero__avatar">R</div><div class="hero__avatar">M</div><div class="hero__avatar">A</div><div class="hero__avatar">+</div>
-        </div>
-        <span><span class="hero__counter" id="counter">0</span> agências já na fila de espera</span>
+        <span>Vagas de acesso antecipado limitadas.</span>
       </div>
     </div>
   </section>
@@ -906,23 +893,6 @@
         }
         drawParticles();
       }
-
-      // ===== Animated counter =====
-      const counterEl = document.getElementById('counter');
-      const targetCount = 247;
-      const duration = 2000;
-      const startTime = performance.now();
-      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
-      function animateCounter(now) {
-        const progress = Math.min((now - startTime) / duration, 1);
-        counterEl.textContent = '+' + Math.floor(easeOutCubic(progress) * targetCount);
-        if (progress < 1) requestAnimationFrame(animateCounter);
-        else counterEl.textContent = '+' + targetCount;
-      }
-      const heroObs = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) { requestAnimationFrame(animateCounter); heroObs.disconnect(); }
-      }, { threshold: 0.3 });
-      heroObs.observe(document.getElementById('hero'));
 
       // ===== Supabase config =====
       const SUPABASE_URL = 'https://ofxchwdlxheiozjkaopz.supabase.co';

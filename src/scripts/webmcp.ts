@@ -21,7 +21,7 @@ async function registerTools() {
       if (current.signal.aborted) return;
       await registry.registerTool(tool, { signal: current.signal });
     }
-    if (!current.signal.aborted) showStatus('ready', 'As ferramentas de consulta e briefing estão disponíveis nesta página. Orçamento e envio continuam indisponíveis.');
+    if (!current.signal.aborted) showStatus('ready', 'As ferramentas de consulta e briefing estão disponíveis nesta página. Preço inicial disponível; orçamento fechado e envio continuam indisponíveis.');
   } catch {
     current.abort();
     showStatus('error', 'Não foi possível disponibilizar as ferramentas neste navegador. Você pode consultar a base e copiar seu resumo pela página.');

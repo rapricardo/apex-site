@@ -1,3 +1,4 @@
+import { gapPayload, clearGaps } from '../lib/faq-gaps';
 import { readDraft, prepareSummary, clearDraft } from '../lib/briefing';
 import { InputError } from '../lib/input';
 
@@ -71,4 +72,40 @@ clearButton.addEventListener('click', () => {
     feedback.textContent = error instanceof InputError ? error.message : 'Não foi possível apagar. Consulte o rascunho novamente.';
     renderBriefing();
   }
+});
+
+const gapText = document.querySelector<HTMLElement>('#gap-json')!;
+const gapStatus = document.querySelector<HTMLElement>('#gap-status')!;
+const gapCopy = document.querySelector<HTMLButtonElement>('#copy-gaps')!;
+const gapClear = document.querySelector<HTMLButtonElement>('#clear-gaps')!;
+let gapRevision = 0;
+function renderGaps() {
+  try {
+    const payload = gapPayload();
+    gapRevision = payload.revision;
+    gapText.textContent = JSON.stringify(payload, null, 2);
+    gapStatus.textContent = `${payload.events.length} dúvida(s) registrada(s) nesta aba. Nenhuma enviada.`;
+    gapCopy.disabled = gapClear.disabled = payload.events.length === 0;
+  } catch (error) {
+    gapText.textContent = '';
+    gapCopy.disabled = gapClear.disabled = true;
+    gapStatus.textContent = error instanceof InputError ? error.message : 'Não foi possível ler as dúvidas.';
+  }
+}
+window.addEventListener('apex:gaps-changed', renderGaps);
+window.addEventListener('pageshow', renderGaps);
+renderGaps();
+gapCopy.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(JSON.stringify(gapPayload(), null, 2));
+    gapStatus.textContent = 'JSON copiado. Nenhuma dúvida enviada.';
+  } catch {
+    gapText.closest('details')!.open = true;
+    gapStatus.textContent = 'Selecione e copie o JSON abaixo. A cópia automática não ficou disponível.';
+  }
+});
+gapClear.addEventListener('click', () => {
+  if (!window.confirm('Apagar as dúvidas sem resposta desta aba? O briefing será preservado.')) return;
+  try { clearGaps({ expected_revision: gapRevision, confirmation: 'apagar_lacunas_locais' }); }
+  catch (error) { gapStatus.textContent = error instanceof InputError ? error.message : 'Não foi possível apagar as dúvidas.'; }
 });

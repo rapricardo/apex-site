@@ -1,0 +1,125 @@
+{
+  "date": "2026-11-06",
+  "url": "http://127.0.0.1:4321/",
+  "mode": "Real browser WebMCP calls plus UI checks; fictitious question; no transmission",
+  "reproduce": [
+    "Run npm run build and npm run preview -- --host 127.0.0.1 --port 4321.",
+    "Use a fresh compatible browser tab; discover tool names, whose suffixes vary. Confirm gaps revision 0 and no existing records before replaying.",
+    "Call the scenarios in order. The event id and created_at are generated; compare shape and revision, not these literal values.",
+    "Reload, open Seu briefing > Dúvidas para melhorar a FAQ, inspect preserved event, then delete only this fictitious record using Apagar dúvidas."
+  ],
+  "calls": [
+    {
+      "tool": "apex_consultar_lacunas",
+      "input": {},
+      "observed": {
+        "ok": true,
+        "revision": 0,
+        "events": []
+      }
+    },
+    {
+      "tool": "apex_consultar_base",
+      "input": {
+        "topic": "manutencao"
+      },
+      "observed": {
+        "ok": true,
+        "plans": [
+          190,
+          390
+        ],
+        "accumulation_policy": "pending"
+      }
+    },
+    {
+      "tool": "apex_registrar_lacuna",
+      "input": {
+        "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+        "topic": "manutencao",
+        "reason": "undefined_policy",
+        "consulted_topics": [
+          "manutencao"
+        ],
+        "expected_revision": 0,
+        "confirmation": "registrar_duvida_impessoal_local"
+      },
+      "observed": {
+        "ok": true,
+        "revision": 1,
+        "events_count": 1,
+        "duplicate": false,
+        "sent": false
+      }
+    },
+    {
+      "tool": "apex_registrar_lacuna",
+      "input": {
+        "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+        "topic": "manutencao",
+        "reason": "undefined_policy",
+        "consulted_topics": [
+          "manutencao"
+        ],
+        "expected_revision": 1,
+        "confirmation": "registrar_duvida_impessoal_local"
+      },
+      "observed": {
+        "ok": true,
+        "revision": 1,
+        "events_count": 1,
+        "duplicate": true
+      }
+    },
+    {
+      "tool": "apex_registrar_lacuna",
+      "input": {
+        "question_summary": "Qual o prazo de atendimento?",
+        "topic": "manutencao",
+        "reason": "undefined_policy",
+        "consulted_topics": [
+          "manutencao"
+        ],
+        "expected_revision": 0,
+        "confirmation": "registrar_duvida_impessoal_local"
+      },
+      "observed": {
+        "ok": false,
+        "error": "revision_conflict"
+      }
+    },
+    {
+      "tool": "apex_registrar_lacuna",
+      "input": {
+        "question_summary": "Envie orçamento para teste@example.com",
+        "topic": "manutencao",
+        "reason": "undefined_policy",
+        "consulted_topics": [
+          "manutencao"
+        ],
+        "expected_revision": 1,
+        "confirmation": "registrar_duvida_impessoal_local"
+      },
+      "observed": {
+        "ok": false,
+        "error": "private_details"
+      }
+    }
+  ],
+  "ui_observations": {
+    "after_reload": {
+      "revision": 1,
+      "events_count": 1
+    },
+    "after_delete": {
+      "revision": 2,
+      "events_count": 0
+    },
+    "briefing": "remained empty",
+    "offer": "R$ 1.800, 30 images counting revisions, plans R$ 190/month and R$ 390/month displayed"
+  },
+  "limits": [
+    "WebMCP handles became stale after reload despite rediscovery; persistence and deletion verified through the UI.",
+    "No remote API, automatic FAQ publication, traffic eligibility calculation, storage quota failure or final quote calculator exercised."
+  ]
+}

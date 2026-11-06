@@ -36,6 +36,7 @@ export async function handleOrder(request: Request, env: Env, transport: Transpo
     validate(requestSchema, submitted);
     const payload = mercurioPayload((submitted as { order: OrderPayload }).order);
     const response = await transport(payload, key);
+    if (![200, 201].includes(response.status)) console.warn('Mercurio upstream request failed', { status: response.status, contentType: response.headers.get('content-type') });
     if (response.status === 429) {
       const delay = response.headers.get('retry-after');
       return json({ error: 'Limite temporário de envios. Aguarde e tente novamente; o identificador será preservado.' }, 429, delay && /^\d{1,6}$/.test(delay) ? { 'Retry-After': delay } : {});
@@ -49,6 +50,7 @@ export async function handleOrder(request: Request, env: Env, transport: Transpo
   } catch (error) {
     if (error instanceof InputError) return json({ error: error.message, code: error.code }, error.code === 'payload_too_large' ? 413 : 400);
     if (error instanceof SyntaxError && !submitted) return json({ error: 'JSON inválido.' }, 400);
+    console.warn('Mercurio transport failed', { name: error instanceof Error ? error.name : 'UnknownError' });
     return json({ error: 'Não foi possível confirmar o recebimento. Seu pedido foi preservado; tente novamente com o mesmo identificador.' }, 502);
   }
 }

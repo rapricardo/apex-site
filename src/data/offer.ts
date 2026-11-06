@@ -6,8 +6,8 @@ export const projects = [
 
 // Informações aprovadas no contexto da proposta. Condições não decididas ficam explícitas.
 export const offer = {
-  version: '2026-11-06-preview',
-  status: 'preview',
+  version: '2026-11-06-briefing-v1',
+  status: 'briefing_available',
   provider: 'Apex, por Ricardo Tocha',
   audience: 'Pequenas e médias empresas que precisam criar ou reformular um site.',
   services: ['Landing page', 'Site institucional', 'Reformulação de site', 'Organização e produção de conteúdo conforme proposta', 'Design e desenvolvimento', 'Integrações conforme escopo'],
@@ -19,14 +19,3 @@ export const offer = {
   privacy: 'Compartilhar somente o resumo e o contato autorizados pelo comprador. Consultas não criam leads. Não solicitar histórico completo da conversa.',
   projects,
 };
-
-export const briefingQuestions = [
-  { id: 'objective', question: 'O que o visitante precisa conseguir fazer no novo site?', purpose: 'Definir o objetivo e a ação principal.' },
-  { id: 'business', question: 'O que sua empresa oferece e para quem?', purpose: 'Contextualizar a comunicação e o público.' },
-  { id: 'current_site', question: 'Já existe um site? Qual o endereço e o que deve ser preservado?', purpose: 'Identificar criação, reformulação e necessidade de migração.' },
-  { id: 'structure', question: 'Quais serviços, públicos ou unidades precisam de espaço próprio?', purpose: 'Delimitar páginas e navegação.' },
-  { id: 'content', question: 'Quais textos, fotos e materiais estão disponíveis?', purpose: 'Identificar produção e reaproveitamento de conteúdo.' },
-  { id: 'features', question: 'Quais recursos e integrações são indispensáveis?', purpose: 'Identificar funcionalidades e dependências técnicas.' },
-  { id: 'editing', question: 'Quem vai atualizar o conteúdo depois?', purpose: 'Avaliar a forma de atualização.' },
-  { id: 'timing', question: 'Há uma data importante e quem aprova o projeto?', purpose: 'Identificar restrições sem prometer prazo.' },
-];

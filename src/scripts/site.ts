@@ -1,32 +1,10 @@
 import { projects } from '../data/offer';
 
-const dialogs = document.querySelectorAll<HTMLDialogElement>('dialog');
-let dialogOpener: HTMLElement | null = null;
 const prompt = document.querySelector<HTMLTextAreaElement>('#chat-prompt')!;
-prompt.value = 'Quero criar ou reformular meu site com a Apex, de Ricardo Tocha. Me ajude a organizar o objetivo, o público, as páginas, o conteúdo e as integrações necessárias. Faça apenas as perguntas que faltam. Por enquanto, prepare um resumo para eu revisar, sem inventar preços ou enviar meus dados. A experiência de orçamento e envio ainda está em preparação.';
+const isLocal = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+const pageReference = isLocal ? 'a página local da Apex aberta no navegador integrado deste computador' : `a página ${location.origin}${location.pathname}`;
+prompt.value = `Consulte ${pageReference} e suas ferramentas de briefing. Quero avaliar um site com a Apex. Me ajude a definir objetivo, público, conteúdo e funcionalidades. Pergunte apenas o que falta e diferencie minhas decisões das suas sugestões. Antes de registrar informações na página, confirme comigo o que será salvo. Prepare um resumo para minha revisão. Preços e envio de pedidos estão indisponíveis; não invente valores ou afirme que um pedido foi enviado. Se não conseguir acessar as ferramentas, explique a limitação.`;
 
-function openDialog(id: string, trigger: HTMLElement) {
-  const dialog = document.getElementById(id) as HTMLDialogElement | null;
-  if (!dialog) return;
-  const previousOpener = dialogOpener;
-  dialogs.forEach(item => { if (item.open) item.close(); });
-  dialogOpener = trigger.closest('dialog') ? previousOpener : trigger;
-  dialog.showModal();
-  dialog.scrollTop = 0;
-}
-document.querySelectorAll<HTMLElement>('[data-dialog]').forEach(button => {
-  button.addEventListener('click', () => openDialog(button.dataset.dialog!, button));
-});
-dialogs.forEach(dialog => {
-  dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
-  dialog.addEventListener('click', event => { if (event.target === dialog) {
-    const bounds = dialog.getBoundingClientRect();
-    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
-  }});
-  dialog.addEventListener('close', () => {
-    if (![...dialogs].some(item => item.open)) dialogOpener?.focus({ preventScroll: true });
-  });
-});
 document.querySelector('#copy-prompt')?.addEventListener('click', async () => {
   const status = document.querySelector<HTMLElement>('#copy-status')!;
   try {

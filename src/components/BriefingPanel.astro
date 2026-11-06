@@ -1,0 +1,13 @@
+<dialog id="briefing-dialog" aria-labelledby="briefing-title">
+  <button class="dialog-close" data-close aria-label="Fechar">×</button>
+  <p class="eyebrow">Seu projeto, até aqui</p>
+  <h2 id="briefing-title">Seu briefing.</h2>
+  <p>As informações registradas pelo seu assistente aparecem aqui. O rascunho fica apenas nesta aba e não é enviado à Apex.</p>
+  <p data-draft-status role="status" aria-live="polite"></p>
+  <div id="briefing-entries" class="briefing-entries"></div>
+  <details class="briefing-summary"><summary>Ler o resumo completo</summary><pre id="briefing-summary-text"></pre></details>
+  <div class="briefing-actions"><button class="button button-blue" id="copy-briefing" disabled>Copiar resumo ↗</button><button class="text-button" id="clear-briefing" disabled>Apagar rascunho</button></div>
+  <p id="briefing-feedback" role="status" aria-live="polite"></p>
+  <div class="availability-note"><strong>Nenhum pedido foi enviado.</strong><p>O rascunho ajuda a definir o projeto. Valores, prazo e condições precisam ser confirmados; o envio de pedidos ainda está indisponível.</p></div>
+  <details><summary>Como corrigir uma informação?</summary><p>Peça ao seu assistente para atualizar o briefing nesta página. Sugestões ficam como hipóteses até você confirmar. Você também pode copiar o resumo para revisar por conta própria.</p></details>
+</dialog>

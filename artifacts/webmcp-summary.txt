@@ -1,0 +1,38 @@
+# Briefing Apex — rascunho para revisão
+Revisão: 4 | Base: 2026-11-06-briefing-v1
+Este resumo não é orçamento, pedido enviado ou contratação.
+
+- Objetivo [Confirmado pelo comprador]: Exemplo fictício: apresentar três serviços de arquitetura e receber pedidos de orçamento.
+- Negócio [Confirmado pelo comprador]: Estúdio Exemplo — empresa fictícia para verificação.
+- Público [Confirmado pelo comprador]: Pessoas planejando reformar uma residência.
+- Ação principal [Confirmado pelo comprador]: Iniciar uma conversa pelo WhatsApp.
+- Tipo de projeto [Confirmado pelo comprador]: Reformulação
+- O que preservar [Confirmado pelo comprador]: Preservar URLs dos serviços e revisar textos.
+- Páginas e estrutura [Confirmado pelo comprador]: Início, três páginas de serviços e contato.
+- Trabalho de conteúdo [Confirmado pelo comprador]: Aproveitar e produzir
+- Integrações necessárias [Confirmado pelo comprador]: Não
+- Blog ou notícias [Confirmado pelo comprador]: Sim
+- Conteúdo do blog [Deixado para depois]: Comprador quer decidir o blog mais tarde.
+- Atualização depois da entrega [Confirmado pelo comprador]: Equipe de marketing atualizará serviços e artigos.
+
+## Informações ainda não fornecidas
+- Não há campo essencial sem resposta. Respostas indefinidas ainda precisam de decisão.
+
+## Respostas preservadas fora do escopo ativo
+- Sistemas e operações: CRM fictício. Registrar uma solicitação; API ainda precisa ser avaliada. (Confirmado pelo comprador). Revisar antes de reutilizar.
+
+## Pontos de escopo para avaliação
+- Avaliar inventário de URLs, conteúdo e dependências existentes antes de definir migração.
+- Definir modelos editoriais, responsável por atualização e necessidade de importar acervo.
+
+## Condições a confirmar com Ricardo
+- Valores e regras de cálculo
+- Condições de pagamento
+- Quantidade de revisões
+- Prazos e disponibilidade
+- Domínio e hospedagem
+- Manutenção e suporte
+- Propriedade e entrega do código
+- Validade da proposta
+
+Envio ao Mercúrio indisponível. Nenhum dado foi encaminhado.

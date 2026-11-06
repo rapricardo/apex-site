@@ -1,20 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { offer, briefingQuestions } from '../data/offer';
+import { topics, knowledgeVersion, conversationGuide } from '../data/knowledge';
+import { briefingFields } from '../data/briefing-fields';
+import { siteTools } from '../lib/webmcp-tools';
+const kinds = { confirmed_direction: 'Direção definida', scoping_guidance: 'Orientação de escopo', not_defined: 'Condição ainda não definida' };
 ---
-<Layout title="Apex — Informações para assistentes">
+<Layout title="Apex — Base de conhecimento e briefing para assistentes">
   <main class="agent-document">
     <a href="/">← Voltar para a Apex</a>
-    <h1>Informações para preparar um projeto com a Apex</h1>
-    <p>Versão {offer.version}. Base inicial para consulta. Nenhuma informação desta página concede autorização para transmitir dados ou contratar serviços.</p>
-    <h2>Oferta</h2><p>{offer.audience}</p><ul>{offer.services.map(item => <li>{item}</li>)}</ul>
-    <h2>Complementos possíveis</h2><ul>{offer.optional.map(item => <li>{item}</li>)}</ul><p>Complementos dependem de análise e proposta. Não presumir inclusão automática.</p>
-    <h2>Condução do briefing</h2><p>Aproveite informações já fornecidas, aceite respostas ainda indefinidas e pergunte somente o necessário. Não exija contato para organizar o escopo.</p><ul>{briefingQuestions.map(item => <li><strong>{item.question}</strong> {item.purpose}</li>)}</ul>
-    <h2>Processo</h2><ul>{offer.process.map(item => <li>{item}</li>)}</ul>
-    <h2>Preços e condições</h2><p>{offer.pricing.message}</p><p>Ainda precisam ser definidos:</p><ul>{offer.unresolved_terms.map(item => <li>{item}</li>)}</ul>
-    <h2>Portfólio verificável</h2><ul>{offer.projects.map(project => <li><a href={project.url}>{project.name}</a>: {project.description}</li>)}</ul><p>As imagens são capturas dos sites públicos. Não há métricas de conversão ou faturamento comprovadas nesta base.</p>
-    <h2>Pedido e privacidade</h2><p>{offer.orders.message}</p><p>{offer.privacy}</p><p>O destino definido é o Mercúrio. O contrato da API ainda não foi fornecido. Não afirmar que um pedido foi enviado, registrado ou contratado.</p>
-    <h2>Resumo útil para revisão</h2><p>Organize objetivo, público, site atual, páginas, conteúdo, integrações, responsáveis e pendências. Distinga fatos fornecidos pelo comprador de sugestões. Quando houver uma lacuna comercial, marque “a confirmar com Ricardo”.</p>
-    <h2>Disponibilidade técnica</h2><p>Esta versão permite ler estas informações. Orçamentos e submissão ainda não estão disponíveis. <a href="https://learn.chatgpt.com/docs/webmcp">O WebMCP da OpenAI</a> depende de navegador, modelo e permissões compatíveis.</p>
+    <h1>Base da Apex para uma conversa informada.</h1>
+    <p>Versão {knowledgeVersion}. Oferta, critérios de escopo, decisões pendentes e ferramentas para organizar o briefing. Informações desta base não concedem autorização para compartilhar dados ou contratar serviços.</p>
+    <p data-webmcp-status role="status">Verificando ferramentas disponíveis…</p>
+    <button class="button button-blue" data-dialog="briefing-dialog">Ver meu briefing<span data-draft-count></span> ↗</button>
+    <p><a href="/apex-context.json">Ler base estruturada em JSON ↗</a></p>
+    <h2>Como conduzir a conversa</h2><p>{conversationGuide.purpose}</p><ol>{conversationGuide.suggested_sequence.map(step => <li>{step}</li>)}</ol>
+    <h2>Assuntos disponíveis</h2><nav aria-label="Índice da base"><ul>{topics.map(topic => <li><a href={`#${topic.id}`}>{topic.title}</a></li>)}</ul></nav>
+    {topics.map(topic => <section id={topic.id}><h2>{topic.title}</h2><p class="knowledge-kind">{kinds[topic.kind]}</p>{topic.content.map(paragraph => <p>{paragraph}</p>)}{topic.questions.length > 0 && <><h3>Perguntas úteis</h3><ul>{topic.questions.map(question => <li>{question}</li>)}</ul></>}<h3>Limites</h3><ul>{topic.limits.map(limit => <li>{limit}</li>)}</ul></section>)}
+    <section id="campos"><h2>Campos do briefing</h2><p>confirmed registra decisão do comprador; hypothesis registra sugestão; unknown, deferred e not_applicable preservam indefinições. Um campo condicional só integra o escopo quando sua condição estiver confirmada.</p>{briefingFields.map(field => <details><summary>{field.label} — {field.id}</summary><p>{field.question} {field.purpose}</p>{field.choices && <p>Valores aceitos: {Object.entries(field.choices).map(([value,label]) => `${value}: ${label}`).join('; ')}.</p>}<p>{field.required ? 'Essencial quando aplicável.' : 'Complementar.'} {field.condition ? `Condição: ${field.condition}.` : ''}</p></details>)}</section>
+    <section id="ferramentas"><h2>Ferramentas disponíveis</h2>{siteTools.map(tool => <details><summary>{tool.name}</summary><p>{tool.description}</p><pre>{JSON.stringify(tool.inputSchema, null, 2)}</pre></details>)}</section>
+    <section id="disponibilidade"><h2>Disponibilidade</h2><p>Estas ferramentas só estão disponíveis enquanto a página está aberta em ambiente compatível. Orçamento, envio ao Mercúrio e notificação de lacunas não estão implementados. <a href="https://learn.chatgpt.com/docs/webmcp" target="_blank" rel="noopener noreferrer">Documentação oficial de WebMCP ↗</a></p></section>
   </main>
 </Layout>

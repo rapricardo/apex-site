@@ -96,7 +96,11 @@ export function evaluateDraft(draft = readDraft()) {
   });
   const requiredMissing = missing.filter(field => field.required);
   const requiredUnresolved = unresolved.filter(field => field.required);
-  const nextQuestions = [...requiredMissing, ...missing.filter(field => !field.required)].slice(0, 3).map(field => ({ field: field.id, question: field.question, why: field.purpose, required: field.required, choices: field.choices ?? null, topic: field.topic }));
+  // Priorizar a rotina antes das decisões de formato; campos continuam sendo o contrato de registro.
+  const discoveryOrder = ['business', 'objective', 'audience', 'primary_action', 'campaigns', 'needs_integrations', 'integrations'];
+  const discoveryMissing = discoveryOrder.flatMap(id => missing.filter(field => field.id === id));
+  const remainingMissing = [...requiredMissing, ...missing.filter(field => !field.required)].filter(field => !discoveryOrder.includes(field.id));
+  const nextQuestions = [...discoveryMissing, ...remainingMissing].slice(0, 2).map(field => ({ field: field.id, question: field.question, why: field.purpose, required: field.required, choices: field.choices ?? null, topic: field.topic }));
   const retainedInactive = briefingFields.filter(field => draft.answers[field.id] && !fieldActive(field, draft)).map(field => ({ field: field.id, label: field.label, answer: draft.answers[field.id], reason: 'A resposta foi preservada, mas sua condição não está confirmada no escopo atual. Revisar antes de reutilizar.' }));
   const status = Object.keys(draft.answers).length === 0 ? 'empty' : requiredMissing.length ? 'in_progress' : requiredUnresolved.length ? 'needs_decisions' : 'ready_for_human_review';
   const confirmed = (id: string, value: string) => draft.answers[id]?.status === 'confirmed' && draft.answers[id].value === value;
@@ -119,7 +123,7 @@ export function evaluateDraft(draft = readDraft()) {
     relevant_topics: [...new Set(['apex', 'precos', 'envio', ...activeFields.filter(field => draft.answers[field.id]).map(field => field.topic)])],
     commercial_pending: offer.unresolved_terms,
     pricing: offer.pricing, submission: offer.orders,
-    guidance: 'Pergunte no máximo três itens por vez. Respostas indefinidas ou adiadas ficam em decisions_to_revisit, sem repetir a mesma pergunta automaticamente. Ready_for_human_review significa briefing organizado, não orçamento ou contratação aprovados.',
+    guidance: 'next_questions são sugestões de informação faltante, não um formulário para recitar. Faça uma pergunta da rotina por vez, no máximo duas relacionadas; siga o que o cliente contou. Use o guia investigativo de apex_consultar_briefing para recomendar somente o que resolve uma necessidade relatada. Não percorra opcionais sem relevância. Respostas indefinidas ou adiadas ficam em decisions_to_revisit, sem insistir. Ready_for_human_review significa briefing organizado, não orçamento ou contratação aprovados.',
   };
 }
 export function prepareSummary(draft = readDraft()) {

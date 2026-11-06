@@ -50,7 +50,7 @@ export async function handleOrder(request: Request, env: Env, transport: Transpo
   } catch (error) {
     if (error instanceof InputError) return json({ error: error.message, code: error.code }, error.code === 'payload_too_large' ? 413 : 400);
     if (error instanceof SyntaxError && !submitted) return json({ error: 'JSON inválido.' }, 400);
-    console.warn('Mercurio transport failed', { name: error instanceof Error ? error.name : 'UnknownError' });
+    console.warn('Mercurio transport failed', { name: error instanceof Error ? error.name : 'UnknownError', message: error instanceof Error ? error.message.slice(0, 200) : '' });
     return json({ error: 'Não foi possível confirmar o recebimento. Seu pedido foi preservado; tente novamente com o mesmo identificador.' }, 502);
   }
 }

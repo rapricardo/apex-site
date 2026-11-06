@@ -22,3 +22,6 @@ pnpm-debug.log*
 .vscode/
 .idea/
 
+
+# Chave local do Mercúrio
+.env.local

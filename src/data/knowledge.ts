@@ -228,7 +228,7 @@ export const topics: Topic[] = [
     id: 'envio', title: 'Pedido, confirmação e Mercúrio', kind: 'confirmed_direction',
     keywords: ['pedido', 'enviar', 'submeter', 'mercurio', 'contratar', 'proposta', 'confirmar', 'lead'],
     content: [
-      'O destino decidido por Ricardo é o Mercúrio. A API está sendo preparada e seu contrato ainda não foi fornecido.',
+      'O destino é o Mercúrio. O contrato da API foi consultado e validado por teste técnico em 6 de novembro de 2026. O fluxo público da Apex ainda não envia pedidos.',
       'Não há ferramenta de submissão nesta versão. Preparar ou copiar um resumo não envia dados e não confirma contratação.',
       'A integração futura deverá mostrar o resumo e o contato a compartilhar, obter confirmação sobre essa versão, validar o pedido no servidor e devolver o identificador do registro.',
       'Consultas e simulações não devem criar oportunidade de abordagem comercial. O envio será uma ação distinta e intencional.',

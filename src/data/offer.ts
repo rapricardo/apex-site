@@ -33,7 +33,7 @@ export const offer = {
     ],
     pending: ['Prazos de atendimento', 'Cancelamento e vigência', 'Acúmulo de horas e valor de excedentes', 'Responsabilidades e cobertura final'],
   },
-  orders: { status: 'unavailable', destination: 'Mercúrio', message: 'API de destino em preparação pelo responsável. Nenhum lead ou pedido é enviado nesta versão.' },
+  orders: { status: 'unavailable', destination: 'Mercúrio', message: 'API do Mercúrio validada em teste técnico. O fluxo público de envio ainda não está conectado; consultas e briefing não enviam leads.' },
   unresolved_terms: ['Preço final por escopo e adicionais', 'Condições de pagamento', 'Revisões de texto e design', 'Prazos e disponibilidade', 'Limites da hospedagem e preço após 12 meses', 'Domínio e e-mail', 'Condições finais dos planos de manutenção', 'Propriedade e entrega do código', 'Validade da proposta'],
   privacy: 'Compartilhar somente o resumo e o contato autorizados pelo comprador. Consultas não criam leads. Não solicitar histórico completo da conversa.',
   projects,

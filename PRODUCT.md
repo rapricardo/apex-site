@@ -29,9 +29,9 @@ O painel Seu briefing permite ler, copiar e apagar. A cópia não é submissão.
 
 ## Integração prevista
 
-Receber o contrato existente do Mercúrio antes de implementar um adaptador. Preservar campos, autenticação e semântica do destino. Credenciais ficam no servidor. Submissão exige confirmação sobre escopo e contato, validação do servidor, prevenção de duplicações e identificador retornado pelo destino. Não mostrar sucesso sem confirmação de registro.
+O contrato do Mercúrio foi consultado e testado em 6 de novembro de 2026. Ao implementar o adaptador público, preservar campos, autenticação e semântica do destino. Credenciais ficam no servidor. Submissão exige confirmação sobre escopo e contato, validação do servidor, prevenção de duplicações e identificador retornado pelo destino. Não mostrar sucesso sem confirmação de registro.
 
-Proposta de informações, sem definir o schema da API: contato autorizado; objetivo e briefing; escopo, exclusões e pendências; estimativa e versão das regras; atribuição disponível; identificação da submissão e confirmação do comprador. Transporte, autenticação e confirmação de recebimento da API ainda pendentes. Preço inicial e propostas de manutenção constam em src/data/offer.ts; o cálculo final depende das regras de escopo.
+Proposta de informações, sem definir o schema da API: contato autorizado; objetivo e briefing; escopo, exclusões e pendências; estimativa e versão das regras; atribuição disponível; identificação da submissão e confirmação do comprador. Transporte, autenticação e confirmação de recebimento da API foram validados no teste técnico abaixo; o fluxo público ainda não está conectado. Preço inicial e propostas de manutenção constam em src/data/offer.ts; o cálculo final depende das regras de escopo.
 
 ## Preservação
 
@@ -62,3 +62,15 @@ Contrato proposto de exportação: schema_version=1; event_type=faq_gap_batch; s
 O código e os schemas canônicos estão em src/lib/faq-gaps.ts. A ferramenta de consulta e o painel exportam exatamente esse JSON. delivery permanece local_only e sent=false. Apagar dúvidas preserva briefing; apagar briefing preserva dúvidas, que possuem controle próprio. Nenhuma lacuna é recebida pelo Mercúrio nem publicada automaticamente na FAQ. A futura integração deverá registrar recebimento confirmado e permitir agrupamento e revisão editorial.
 
 Verificação incremental desta atualização: artifacts/faq-gaps-e2e.json registra a sequência reproduzível no navegador, incluindo classificação, duplicação, revisão antiga, rejeição de e-mail, persistência e exclusão pela interface. artifacts/faq-gap-payload-example.json contém o JSON de um exemplo fictício efetivamente registrado, removido da sessão após a verificação. Após recarga, os identificadores WebMCP retornaram estado expirado; persistência e exclusão foram verificadas pela interface. Build e checagem TypeScript restrita a src passaram.
+
+## Contrato do Mercúrio e teste técnico — 6 de novembro de 2026
+
+Fonte: https://app.mercurio.ia.br/configuracoes/captacao-leads, consultada na sessão autenticada de Ricardo. POST https://app.mercurio.ia.br/api/webhooks/leads; autenticação Authorization: Bearer. Chave local em .env.local, variável MERCURIO_LEADS_API_KEY, fora do Git e sem prefixo PUBLIC_. Na futura publicação, configurar como segredo do servidor; nunca incluir no JavaScript entregue ao navegador. O Apex ainda é estático e não possui adaptador público de envio.
+
+Campos: id_envio estável (até 100 letras, números e . _ : -), nome e pelo menos email ou telefone; empresa/cnpj opcionais; servico_id=67 identifica Site no catálogo consultado; interesse/mensagem são texto; pagina, utm_source, utm_medium, utm_campaign e ref preservam origem. dados aceita objeto JSON até 48 KB; _gotcha deve ficar vazio. Demais campos de tracking da Apex continuam preservados em seu contrato e podem integrar dados no adaptador futuro, sem substituir os campos reconhecidos pelo Mercúrio.
+
+Resposta: 201 com protocolo, status e reenvio=false para novo pedido; repetição do mesmo id_envio retorna 200 com o mesmo protocolo e reenvio=true. Erros: 400 com campos, 401 para chave inválida e 429 com Retry-After. A implementação futura só deve confirmar recebimento com protocolo válido e manter o mesmo id_envio em uma tentativa de reenvio.
+
+Este endpoint cria leads e exige contato. Lacunas da FAQ podem acompanhar o pedido autorizado em dados.faq_gaps. Para receber somente lacunas, sem criar lead, será necessário um endpoint próprio; não fabricar contato para contornar essa exigência. O registro fictício abaixo é exclusivamente teste técnico autorizado por Ricardo.
+
+scripts/test-mercurio.mjs lê a chave sem exibi-la, usa curl com cabeçalho pelo stdin, envia registro claramente identificado e verifica idempotência. Reproduzir com node scripts/test-mercurio.mjs --id=apex-test-20261106-01; esse ID reutiliza o pedido já testado. O arquivo artifacts/apex-test-20261106-01.json registra payload e respostas sem chave. Primeira chamada: 201; segunda: 200; protocolo 67943e6d-8109-4889-a7e9-b1389afefb87. Conferido na interface: um pedido no lead TESTE TÉCNICO APEX — NÃO CONTATAR, com briefing, estimativa e faq_gaps preservados. O lead foi mantido para revisão. Nenhuma mensagem foi enviada a terceiros.

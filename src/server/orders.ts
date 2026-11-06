@@ -5,7 +5,7 @@ export const mercurioEndpoint = 'https://app.mercurio.ia.br/api/webhooks/leads';
 type Env = { MERCURIO_LEADS_API_KEY?: string };
 export type Transport = (payload: unknown, key: string) => Promise<Response>;
 const send: Transport = (payload, key) => fetch(mercurioEndpoint, {
-  method: 'POST', redirect: 'error', signal: AbortSignal.timeout(20000),
+  method: 'POST', redirect: 'manual', signal: AbortSignal.timeout(20000),
   headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
 });
 const json = (body: unknown, status = 200, extra: Record<string, string> = {}) => new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...extra } });

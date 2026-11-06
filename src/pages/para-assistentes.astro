@@ -13,7 +13,7 @@ const kinds = { confirmed_direction: 'Direção definida', scoping_guidance: 'Or
     <p data-webmcp-status role="status">Verificando ferramentas disponíveis…</p>
     <button class="button button-blue" data-dialog="briefing-dialog">Ver meu briefing<span data-draft-count></span> ↗</button>
     <p><a href="/apex-context.json">Ler base estruturada em JSON ↗</a></p>
-    <h2>Como conduzir a conversa</h2><p>{conversationGuide.purpose}</p><ol>{conversationGuide.suggested_sequence.map(step => <li>{step}</li>)}</ol>
+    <h2>Como conduzir a conversa</h2><p>{conversationGuide.purpose}</p><h3>Abertura sugerida</h3><blockquote>{conversationGuide.opening}</blockquote><h3>Consentimento e envio</h3><ul>{conversationGuide.consent_and_delivery.map(step => <li>{step}</li>)}</ul><ol>{conversationGuide.suggested_sequence.map(step => <li>{step}</li>)}</ol>
     <h2>Investigar a rotina</h2>{conversationGuide.discovery_paths.map(path => <section><h3>{path.signal}</h3><p>{path.ask}</p><p>{path.investigate}</p><p>{path.recommend_when}</p></section>)}
     <h2>Comparar alternativas na internet</h2><ul>{conversationGuide.market_research.map(step => <li>{step}</li>)}</ul>
     <h2>Limites da condução</h2><ul>{conversationGuide.boundaries.map(boundary => <li>{boundary}</li>)}</ul>

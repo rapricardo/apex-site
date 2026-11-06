@@ -6,7 +6,7 @@ export const projects = [
 
 // Informações aprovadas no contexto da proposta. Condições não decididas ficam explícitas.
 export const offer = {
-  version: '2026-11-06-commercial-v2',
+  version: '2026-11-06-orders-v3',
   status: 'briefing_available',
   provider: 'Apex, por Ricardo Tocha',
   audience: 'Pequenas e médias empresas que precisam criar ou reformular um site.',
@@ -33,7 +33,7 @@ export const offer = {
     ],
     pending: ['Prazos de atendimento', 'Cancelamento e vigência', 'Acúmulo de horas e valor de excedentes', 'Responsabilidades e cobertura final'],
   },
-  orders: { status: 'unavailable', destination: 'Mercúrio', message: 'API do Mercúrio validada em teste técnico. O fluxo público de envio ainda não está conectado; consultas e briefing não enviam leads.' },
+  orders: { status: 'confirmation_required', destination: 'Mercúrio', message: 'Envio disponível mediante revisão e confirmação explícita. O servidor precisa estar configurado. Só há recebimento confirmado com protocolo do Mercúrio; consultar ou preparar não envia dados.' },
   unresolved_terms: ['Preço final por escopo e adicionais', 'Condições de pagamento', 'Revisões de texto e design', 'Prazos e disponibilidade', 'Limites da hospedagem e preço após 12 meses', 'Domínio e e-mail', 'Condições finais dos planos de manutenção', 'Propriedade e entrega do código', 'Validade da proposta'],
   privacy: 'Compartilhar somente o resumo e o contato autorizados pelo comprador. Consultas não criam leads. Não solicitar histórico completo da conversa.',
   projects,

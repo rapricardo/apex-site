@@ -155,7 +155,7 @@ export const topics: Topic[] = [
     keywords: ['webmcp', 'mcp', 'chatgpt', 'assistente', 'agente', 'ferramentas', 'chatbot'],
     content: [
       'A proposta é o comprador usar seu próprio assistente para consultar a oferta, organizar necessidades e explorar alternativas. O assistente continua ajudando o comprador a decidir.',
-      'Na Apex atual, as ferramentas permitem ler a base, preparar um briefing nesta aba, identificar pendências, comparar configurações e obter um resumo. Não calculam preço nem enviam pedidos.',
+      'Na Apex atual, as ferramentas permitem ler a base, preparar um briefing nesta aba, identificar pendências, comparar configurações e obter um resumo. Não calculam preço fechado. O envio tem preparação e confirmação separadas, com protocolo do Mercúrio.',
       'WebMCP depende de uma página aberta em ambiente compatível. Na implementação atual da OpenAI, usa o navegador integrado do aplicativo desktop, com modelo e permissões compatíveis.',
       'Um MCP remoto pode operar fora da página, mas exige outra conexão. Não há servidor MCP remoto nem plugin instalável do Apex nesta entrega.',
       'Para oferecer a experiência no site de outro negócio, é necessário definir informação confiável, operações permitidas, regras comerciais e integrações. A funcionalidade depende do escopo.'
@@ -216,9 +216,10 @@ export const topics: Topic[] = [
     keywords: ['dados', 'privacidade', 'salvar', 'contato', 'telefone', 'email', 'armazenamento', 'seguranca'],
     content: [
       'O rascunho é salvo no sessionStorage desta aba, separado do tracking existente. Não é enviado ao Mercúrio, ao Apolo nem a uma base de leads pelas ferramentas.',
+      'O pedido guarda contato e revisão no sessionStorage sob __apex_order_v1 para preservar tentativas e protocolo. A pessoa pode limpar o pedido local depois de confirmado ou antes de enviar; isso não apaga um lead já recebido. Não limpar um envio sem confirmação, pois o identificador precisa ser preservado para consulta e reenvio.',
       'Salvar o briefing é uma operação explícita. O comprador pode consultar, copiar e apagar o rascunho. Recarregar a aba mantém o rascunho; outras abas não são sincronizadas. O navegador pode restaurar sessões, então apagar pelo painel é a forma explícita de remover o conteúdo.',
       'O assistente e o navegador envolvidos na conversa também processam o conteúdo conforme suas próprias condições. Não prometer anonimato completo.',
-      'O rascunho não pede telefone, e-mail, senhas, chaves ou documentos pessoais. Dados de contato ficam para o fluxo de envio quando estiver implementado.',
+      'O rascunho não pede telefone, e-mail, senhas, chaves ou documentos pessoais. Nome e e-mail ou telefone são solicitados apenas na preparação do pedido. A confirmação autoriza envio para retorno sobre a proposta, sem adesão automática a campanhas.',
       'A página mantém o tracking de navegação existente. O conteúdo do briefing não é colocado nos eventos de analytics ou na URL por este fluxo.'
     ],
     questions: ['O comprador quer salvar estas informações nesta aba ou apenas discutir alternativas?'],
@@ -228,10 +229,10 @@ export const topics: Topic[] = [
     id: 'envio', title: 'Pedido, confirmação e Mercúrio', kind: 'confirmed_direction',
     keywords: ['pedido', 'enviar', 'submeter', 'mercurio', 'contratar', 'proposta', 'confirmar', 'lead'],
     content: [
-      'O destino é o Mercúrio. O contrato da API foi consultado e validado por teste técnico em 6 de novembro de 2026. O fluxo público da Apex ainda não envia pedidos.',
-      'Não há ferramenta de submissão nesta versão. Preparar ou copiar um resumo não envia dados e não confirma contratação.',
-      'A integração futura deverá mostrar o resumo e o contato a compartilhar, obter confirmação sobre essa versão, validar o pedido no servidor e devolver o identificador do registro.',
-      'Consultas e simulações não devem criar oportunidade de abordagem comercial. O envio será uma ação distinta e intencional.',
+      'O destino é o Mercúrio. O contrato da API foi consultado e validado por teste técnico em 6 de novembro de 2026. A Apex disponibiliza revisão e envio ao Mercúrio pelo site e pelo WebMCP, usando a mesma operação no servidor.',
+      'apex_preparar_pedido cria uma revisão local com contato, resumo, briefing e dúvidas incluídas. apex_enviar_pedido exige o review_id exato e confirmação explícita do comprador após a revisão. Preparar ou copiar um resumo não envia dados e não confirma contratação.',
+      'O site exibe o conteúdo a compartilhar e exige confirmação. O servidor valida os dados e usa a chave protegida para enviar. A resposta precisa conter protocolo válido. A atribuição e todos os 26 campos de tracking acompanham o pedido; o briefing não entra em eventos de analytics.',
+      'Consultas e simulações não devem criar oportunidade de abordagem comercial. O envio é uma ação distinta e intencional. Dados incompletos do projeto podem seguir como pendências explícitas; nome, um contato e resumo são necessários.',
       'Caso o comprador queira conversar agora, a página oferece o contato com Ricardo. Não iniciar mensagem ou compartilhar o briefing automaticamente.'
     ],
     questions: [],
@@ -267,7 +268,7 @@ export const topics: Topic[] = [
       'Uma sugestão do assistente precisa ficar marcada como hipótese até confirmação. Uma alteração de decisão não deve apagar silenciosamente o contexto de outros requisitos.',
       'Após ler os assuntos pertinentes, o assistente pode registrar uma pergunta sem resposta com apex_registrar_lacuna. A classificação é proposta pelo assistente e validada contra categorias conhecidas; não é uma decisão editorial. Usar apenas um resumo impessoal da dúvida, autorizado pelo comprador, sem contato, empresa, URL privada, credenciais ou transcrição.',
       'Classificar motivo: not_documented (ausente), partial_answer (parcial), undefined_policy (condição ainda não decidida), needs_evaluation (avaliação específica) ou conflicting_information (informações divergentes). Dados que faltam sobre o comprador pertencem ao briefing, não à FAQ.',
-      'O registro fica apenas nesta aba, separado do briefing e de leads. Consultar/exportar o JSON e apagar registros pelo painel ou ferramentas. Ricardo ainda não recebe notificações. O contrato proposto usa event_type faq_gap_batch; a futura API deve agrupar dúvidas recorrentes para revisão humana antes de enriquecer a FAQ.'
+      'O registro fica apenas nesta aba, separado do briefing e de leads. Consultar/exportar o JSON e apagar registros pelo painel ou ferramentas. As dúvidas selecionadas podem acompanhar um pedido confirmado em dados.faq_gaps. Consultar/exportar não transmite e não há envio separado de FAQ. A classificação continua pendente de revisão humana antes de enriquecer a base.'
     ],
     questions: ['O ponto depende de uma decisão do comprador ou de uma condição da Apex?'],
     limits: ['Não inventar uma política para completar a resposta.', 'Não afirmar que Ricardo foi avisado.', 'Não transformar falta de informação em promessa.']
@@ -285,7 +286,7 @@ export const conversationGuide = {
     'Quando a base não resolver a pergunta, explicar o limite e oferecer registro local da dúvida impessoal. Registrar apenas com autorização; não interpretar resultado de busca como prova de ausência.',
     'Avaliar pendências e comparar alternativas quando isso ajudar a decisão.',
     'Preparar um resumo que diferencie escopo, hipóteses, decisões do cliente e condições a confirmar com Ricardo.',
-    'Informar que não existe envio nesta versão; o comprador pode copiar o resumo ou continuar esclarecendo o projeto.'
+    'Se o comprador quiser uma proposta, preparar o pedido com o contato autorizado e a seleção de dúvidas. Mostrar toda a revisão e pedir confirmação antes de enviar. Em erro, consultar e repetir o mesmo review_id; nunca afirmar recebimento sem protocolo.'
   ],
   boundaries: [
     'Informar apenas os preços publicados e seu status: valor inicial ou proposta de plano. Não confirmar preço final, prazo, contratação ou envio.',
@@ -303,6 +304,6 @@ export function knowledgeIndex() {
     status_labels: { confirmed_direction: 'Direção definida por Ricardo', scoping_guidance: 'Orientação de escopo; não é compromisso comercial', not_defined: 'Condição comercial ainda não definida' },
     topics: topics.map(({ id, title, kind }) => ({ id, title, kind, source: `/para-assistentes#${id}` })),
     projects,
-    capabilities: { knowledge: true, local_briefing: true, scope_comparison: true, pricing: false, starting_prices: true, local_faq_gaps: true, submission: false, remote_mcp: false },
+    capabilities: { knowledge: true, local_briefing: true, scope_comparison: true, pricing: false, starting_prices: true, local_faq_gaps: true, submission: true, remote_mcp: false },
   };
 }

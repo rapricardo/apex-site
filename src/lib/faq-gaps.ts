@@ -14,11 +14,11 @@ export const gapInputSchema = objectSchema({
   confirmation: enumSchema(['registrar_duvida_impessoal_local']),
 });
 export const clearGapsSchema = objectSchema({ expected_revision: revisionSchema, confirmation: enumSchema(['apagar_lacunas_locais']) });
-const eventSchema = objectSchema({
+export const gapEventSchema = objectSchema({
   ...classificationSchema.properties, id: textSchema(80), created_at: textSchema(40), base_version: textSchema(80),
 });
-const storeSchema = objectSchema({ schema_version: { type: 'integer', enum: [1] }, revision: revisionSchema, events: arraySchema(eventSchema, 50, 0) });
-type Gap = { question_summary: string; topic: string; reason: typeof gapReasons[number]; consulted_topics: string[]; id: string; created_at: string; base_version: string };
+const storeSchema = objectSchema({ schema_version: { type: 'integer', enum: [1] }, revision: revisionSchema, events: arraySchema(gapEventSchema, 50, 0) });
+export type Gap = { question_summary: string; topic: string; reason: typeof gapReasons[number]; consulted_topics: string[]; id: string; created_at: string; base_version: string };
 type GapStore = { schema_version: 1; revision: number; events: Gap[] };
 const key = '__apex_faq_gaps_v1';
 
@@ -42,7 +42,7 @@ export function gapPayload(store = readGaps()) {
   return {
     schema_version: 1, event_type: 'faq_gap_batch', source: 'apex_webmcp', revision: store.revision,
     events: store.events.map(event => ({ ...event, classification_by: 'assistant', editorial_status: 'pending_review' })),
-    delivery: { status: 'local_only', sent: false, destination: 'Mercúrio', api_status: 'pending' },
+    delivery: { status: 'export_only', sent: false, destination: 'Mercúrio', message: 'Esta consulta não transmite. Dúvidas podem acompanhar um pedido confirmado; o recibo do pedido informa seu envio.' },
   };
 }
 const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();

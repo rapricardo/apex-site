@@ -1,7 +1,7 @@
 import { loadEnvFile } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
-import { spawn } from 'node:child_process';
+import { sendMercurioLocal } from './mercurio-transport.mjs';
 
 const root = new URL('../', import.meta.url);
 try { loadEnvFile(fileURLToPath(new URL('.env.local', root))); }
@@ -45,25 +45,9 @@ if (Buffer.byteLength(JSON.stringify(payload.dados), 'utf8') > 48 * 1024) throw 
 const report = { tested_at: new Date().toISOString(), endpoint, id_envio: submissionId, payload, requests: [], passed: false };
 
 async function send() {
-  // curl usa a resolução de rede disponível nesta máquina. Chave apenas no stdin,
-  // sem shell, argumentos de processo, arquivo de cabeçalhos ou redirecionamentos.
-  const raw = await new Promise((resolve, reject) => {
-    const request = spawn('curl', ['--silent', '--max-time', '20', '--request', 'POST', '--url', endpoint,
-      '--header', '@-', '--header', 'Content-Type: application/json', '--data-binary', JSON.stringify(payload), '--write-out', '\n%{http_code}'],
-    { stdio: ['pipe', 'pipe', 'pipe'] });
-    let output = '';
-    request.stdout.setEncoding('utf8');
-    request.stdout.on('data', chunk => { output += chunk; if (output.length > 100000) request.kill(); });
-    request.stderr.resume();
-    request.stdin.on('error', () => {});
-    request.on('error', reject);
-    request.on('close', code => code === 0 ? resolve(output) : reject(new Error('network_failed')));
-    request.stdin.end(`Authorization: Bearer ${key}\n`);
-  });
-  const split = raw.lastIndexOf('\n');
-  const httpStatus = Number(raw.slice(split + 1));
-  let body;
-  try { body = JSON.parse(raw.slice(0, split)); } catch { body = null; }
+  const response = await sendMercurioLocal(payload, key);
+  const httpStatus = response.status;
+  const body = await response.json().catch(() => null);
   const result = {
     http_status: httpStatus,
     protocolo: typeof body?.protocolo === 'string' && /^[a-zA-Z0-9-]{1,100}$/.test(body.protocolo) ? body.protocolo : null,

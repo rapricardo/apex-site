@@ -1,0 +1,36 @@
+---
+import { trackingFields } from '../data/tracking-fields';
+---
+<dialog id="order-dialog" aria-labelledby="order-title">
+  <button class="dialog-close" data-close aria-label="Fechar">×</button>
+  <p class="eyebrow">Apex / Solicitação de proposta</p>
+  <h2 id="order-title">Vamos definir<br />seu projeto.</h2>
+  <p>Conte o que precisa e escolha um contato para receber o retorno. Você revisa tudo antes de enviar.</p>
+  <form id="order-form" class="order-form" method="post" action="/api/pedidos">
+    <label for="order-name">Seu nome<input id="order-name" name="nome" autocomplete="name" required minlength="2" maxlength="120" /></label>
+    <label for="order-company">Empresa <span>(opcional)</span><input id="order-company" name="empresa" autocomplete="organization" maxlength="160" /></label>
+    <div class="order-contact-grid">
+      <label for="order-email">E-mail<input id="order-email" name="email" type="email" autocomplete="email" maxlength="254" /></label>
+      <label for="order-phone">Telefone com DDD<input id="order-phone" name="telefone" type="tel" autocomplete="tel" maxlength="40" /></label>
+    </div>
+    <p class="order-hint">Informe pelo menos e-mail ou telefone.</p>
+    <label for="order-message">O que seu site precisa fazer?<textarea id="order-message" name="mensagem" required minlength="20" maxlength="4000" rows="4" placeholder="Apresentar meus serviços, receber pedidos de orçamento…"></textarea></label>
+    <p class="order-hint" id="order-briefing-note">Se houver um briefing nesta aba, ele acompanhará o pedido.</p>
+    <label class="order-check"><input id="order-include-faq" type="checkbox" checked /> Incluir as dúvidas sem resposta registradas nesta aba</label>
+    <div hidden aria-hidden="true"><label for="order-gotcha">Deixe vazio<input id="order-gotcha" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+    {trackingFields.map(field => <input type="hidden" id={`h_${field}`} name={field} value="" />)}
+    <button class="button button-blue" id="review-order" type="submit">Revisar pedido ↗</button>
+  </form>
+  <section id="order-review" class="order-review" hidden aria-labelledby="order-review-title">
+    <h3 id="order-review-title">Confira antes de enviar.</h3>
+    <div id="order-review-content"></div>
+    <p class="order-hint">O contato, o projeto, o briefing, as dúvidas exibidas e os dados de origem serão enviados à Apex pelo Mercúrio para responder a esta solicitação. Isso não confirma contratação, preço final ou prazo.</p>
+    <label class="order-check"><input id="order-consent" type="checkbox" /> Confirmo o conteúdo acima e autorizo o envio para receber a proposta.</label>
+    <div class="briefing-actions"><button class="button button-blue" id="send-order" type="button" disabled>Enviar pedido ↗</button><button class="text-button" id="edit-order" type="button">Editar</button></div>
+  </section>
+  <p id="order-feedback" role="status" aria-live="polite"></p>
+  <section id="order-receipt" class="availability-note" hidden aria-labelledby="order-receipt-title">
+    <h3 id="order-receipt-title">Pedido recebido.</h3><p id="order-protocol"></p><p>Ricardo poderá retornar pelo contato informado. O escopo e as condições serão confirmados na proposta.</p>
+  </section>
+  <button class="text-button" id="clear-order" type="button" hidden>Limpar pedido desta aba</button>
+</dialog>

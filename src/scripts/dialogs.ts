@@ -1,6 +1,6 @@
 const dialogs = document.querySelectorAll<HTMLDialogElement>('dialog');
 let dialogOpener: HTMLElement | null = null;
-function openDialog(id: string, trigger: HTMLElement) {
+export function openDialog(id: string, trigger: HTMLElement) {
   const dialog = document.getElementById(id) as HTMLDialogElement | null;
   if (!dialog) return;
   const previousOpener = dialogOpener;

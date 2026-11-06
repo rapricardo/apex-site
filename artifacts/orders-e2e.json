@@ -1,0 +1,1090 @@
+{
+  "date": "2026-11-06",
+  "url": "http://127.0.0.1:4322/",
+  "reproduce": [
+    "npm run dev -- --host 127.0.0.1 --port 4322; requires local key and explicit authorization to create fictitious leads.",
+    "Use fresh browser tabs. Discover WebMCP tool names; execute recorded inputs, substituting review_id returned by the matching preparation.",
+    "Site: open Pedir proposta por aqui; enter synthetic name and summary; missing contact blocks review; add synthetic email; review contains briefing and FAQ; confirm then send.",
+    "Re-discover tools after navigation. Some browser handles expired; a fresh tab allowed the complete WebMCP sequence."
+  ],
+  "site": {
+    "protocol": "db7bf915-a895-4616-9f61-044ed8919edc",
+    "missing_contact_blocked": true,
+    "confirmation_required": true,
+    "hidden_fields_count": 26,
+    "received": true
+  },
+  "webmcp": {
+    "protocol": "073d4b39-9eab-4eeb-8a07-2e3198042ab9",
+    "stale_review_rejected": "review_changed",
+    "repeat_returns_same_receipt": true
+  },
+  "calls": [
+    {
+      "name": "apex_atualizar_briefing",
+      "input": {
+        "expected_revision": 0,
+        "changes": [
+          {
+            "field": "objective",
+            "status": "confirmed",
+            "value": "Teste fictício do fluxo completo: apresentar serviços e receber pedidos."
+          },
+          {
+            "field": "project_type",
+            "status": "confirmed",
+            "value": "landing_page"
+          },
+          {
+            "field": "traffic_volume",
+            "status": "hypothesis",
+            "value": "Previsão fictícia de 5 mil visitas mensais."
+          }
+        ]
+      },
+      "result": {
+        "ok": true,
+        "base_version": "2026-11-06-orders-v3",
+        "data": {
+          "draft": {
+            "schema_version": 1,
+            "revision": 1,
+            "id": "0b2f00e7-57fd-41ee-b6ef-fdc020d47e09",
+            "updated_at": "2026-11-06T22:13:28.312Z",
+            "answers": {
+              "objective": {
+                "status": "confirmed",
+                "value": "Teste fictício do fluxo completo: apresentar serviços e receber pedidos."
+              },
+              "project_type": {
+                "status": "confirmed",
+                "value": "landing_page"
+              },
+              "traffic_volume": {
+                "status": "hypothesis",
+                "value": "Previsão fictícia de 5 mil visitas mensais."
+              }
+            }
+          },
+          "evaluation": {
+            "revision": 1,
+            "status": "in_progress",
+            "can_prepare_summary": true,
+            "scope_notes": [],
+            "next_questions": [
+              {
+                "field": "business",
+                "question": "O que sua empresa oferece?",
+                "why": "Contextualizar serviços e conteúdo.",
+                "required": true,
+                "choices": null,
+                "topic": "apex"
+              },
+              {
+                "field": "audience",
+                "question": "Quem precisa usar o site?",
+                "why": "Definir para quem organizar a informação.",
+                "required": true,
+                "choices": null,
+                "topic": "objetivo"
+              },
+              {
+                "field": "primary_action",
+                "question": "O que o visitante precisa conseguir fazer?",
+                "why": "Definir o próximo passo: orçamento, agendamento, contato ou outra ação.",
+                "required": true,
+                "choices": null,
+                "topic": "objetivo"
+              }
+            ],
+            "missing_required": [
+              {
+                "field": "business",
+                "label": "Negócio"
+              },
+              {
+                "field": "audience",
+                "label": "Público"
+              },
+              {
+                "field": "primary_action",
+                "label": "Ação principal"
+              },
+              {
+                "field": "structure",
+                "label": "Páginas e estrutura"
+              },
+              {
+                "field": "content_work",
+                "label": "Trabalho de conteúdo"
+              },
+              {
+                "field": "needs_integrations",
+                "label": "Integrações necessárias"
+              },
+              {
+                "field": "updates",
+                "label": "Atualização depois da entrega"
+              }
+            ],
+            "decisions_to_revisit": [
+              {
+                "field": "traffic_volume",
+                "label": "Tráfego mensal",
+                "status": "hypothesis",
+                "value": "Previsão fictícia de 5 mil visitas mensais.",
+                "question": "Quantas sessões ou visitas por mês o site recebe? Informe período e fonte, ou diga se é uma previsão."
+              }
+            ],
+            "retained_inactive": [],
+            "relevant_topics": [
+              "apex",
+              "precos",
+              "envio",
+              "objetivo",
+              "formatos",
+              "hospedagem"
+            ],
+            "commercial_pending": [
+              "Preço final por escopo e adicionais",
+              "Condições de pagamento",
+              "Revisões de texto e design",
+              "Prazos e disponibilidade",
+              "Limites da hospedagem e preço após 12 meses",
+              "Domínio e e-mail",
+              "Condições finais dos planos de manutenção",
+              "Propriedade e entrega do código",
+              "Validade da proposta"
+            ],
+            "pricing": {
+              "status": "starting_price",
+              "currency": "BRL",
+              "one_page_from": 1800,
+              "message": "Site de página única a partir de R$ 1.800. O preço final depende do escopo; este valor não inclui automaticamente integrações ou tracking avançado. Não há calculador de orçamento fechado."
+            },
+            "submission": {
+              "status": "confirmation_required",
+              "destination": "Mercúrio",
+              "message": "Envio disponível mediante revisão e confirmação explícita. O servidor precisa estar configurado. Só há recebimento confirmado com protocolo do Mercúrio; consultar ou preparar não envia dados."
+            },
+            "guidance": "Pergunte no máximo três itens por vez. Respostas indefinidas ou adiadas ficam em decisions_to_revisit, sem repetir a mesma pergunta automaticamente. Ready_for_human_review significa briefing organizado, não orçamento ou contratação aprovados."
+          },
+          "saved_locally": true,
+          "sent": false
+        }
+      }
+    },
+    {
+      "name": "apex_registrar_lacuna",
+      "input": {
+        "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+        "topic": "manutencao",
+        "reason": "undefined_policy",
+        "consulted_topics": [
+          "manutencao"
+        ],
+        "expected_revision": 0,
+        "confirmation": "registrar_duvida_impessoal_local"
+      },
+      "result": {
+        "ok": true,
+        "base_version": "2026-11-06-orders-v3",
+        "data": {
+          "schema_version": 1,
+          "event_type": "faq_gap_batch",
+          "source": "apex_webmcp",
+          "revision": 1,
+          "events": [
+            {
+              "id": "b235fc6c-cfd0-4da3-9edc-290a4644ae21",
+              "created_at": "2026-11-06T22:13:30.525Z",
+              "base_version": "2026-11-06-orders-v3",
+              "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+              "topic": "manutencao",
+              "reason": "undefined_policy",
+              "consulted_topics": [
+                "manutencao"
+              ],
+              "classification_by": "assistant",
+              "editorial_status": "pending_review"
+            }
+          ],
+          "delivery": {
+            "status": "export_only",
+            "sent": false,
+            "destination": "Mercúrio",
+            "message": "Esta consulta não transmite. Dúvidas podem acompanhar um pedido confirmado; o recibo do pedido informa seu envio."
+          },
+          "duplicate": false
+        }
+      }
+    },
+    {
+      "name": "apex_atualizar_briefing",
+      "input": {
+        "expected_revision": 0,
+        "changes": [
+          {
+            "field": "objective",
+            "status": "confirmed",
+            "value": "Teste fictício: fluxo de pedido por assistente."
+          }
+        ]
+      },
+      "result": {
+        "ok": true,
+        "base_version": "2026-11-06-orders-v3",
+        "data": {
+          "draft": {
+            "schema_version": 1,
+            "revision": 1,
+            "id": "7688407f-7234-4375-acd7-55abcbe04206",
+            "updated_at": "2026-11-06T22:15:56.532Z",
+            "answers": {
+              "objective": {
+                "status": "confirmed",
+                "value": "Teste fictício: fluxo de pedido por assistente."
+              }
+            }
+          },
+          "evaluation": {
+            "revision": 1,
+            "status": "in_progress",
+            "can_prepare_summary": true,
+            "scope_notes": [],
+            "next_questions": [
+              {
+                "field": "business",
+                "question": "O que sua empresa oferece?",
+                "why": "Contextualizar serviços e conteúdo.",
+                "required": true,
+                "choices": null,
+                "topic": "apex"
+              },
+              {
+                "field": "audience",
+                "question": "Quem precisa usar o site?",
+                "why": "Definir para quem organizar a informação.",
+                "required": true,
+                "choices": null,
+                "topic": "objetivo"
+              },
+              {
+                "field": "primary_action",
+                "question": "O que o visitante precisa conseguir fazer?",
+                "why": "Definir o próximo passo: orçamento, agendamento, contato ou outra ação.",
+                "required": true,
+                "choices": null,
+                "topic": "objetivo"
+              }
+            ],
+            "missing_required": [
+              {
+                "field": "business",
+                "label": "Negócio"
+              },
+              {
+                "field": "audience",
+                "label": "Público"
+              },
+              {
+                "field": "primary_action",
+                "label": "Ação principal"
+              },
+              {
+                "field": "project_type",
+                "label": "Tipo de projeto"
+              },
+              {
+                "field": "structure",
+                "label": "Páginas e estrutura"
+              },
+              {
+                "field": "content_work",
+                "label": "Trabalho de conteúdo"
+              },
+              {
+                "field": "needs_integrations",
+                "label": "Integrações necessárias"
+              },
+              {
+                "field": "updates",
+                "label": "Atualização depois da entrega"
+              }
+            ],
+            "decisions_to_revisit": [],
+            "retained_inactive": [],
+            "relevant_topics": [
+              "apex",
+              "precos",
+              "envio",
+              "objetivo"
+            ],
+            "commercial_pending": [
+              "Preço final por escopo e adicionais",
+              "Condições de pagamento",
+              "Revisões de texto e design",
+              "Prazos e disponibilidade",
+              "Limites da hospedagem e preço após 12 meses",
+              "Domínio e e-mail",
+              "Condições finais dos planos de manutenção",
+              "Propriedade e entrega do código",
+              "Validade da proposta"
+            ],
+            "pricing": {
+              "status": "starting_price",
+              "currency": "BRL",
+              "one_page_from": 1800,
+              "message": "Site de página única a partir de R$ 1.800. O preço final depende do escopo; este valor não inclui automaticamente integrações ou tracking avançado. Não há calculador de orçamento fechado."
+            },
+            "submission": {
+              "status": "confirmation_required",
+              "destination": "Mercúrio",
+              "message": "Envio disponível mediante revisão e confirmação explícita. O servidor precisa estar configurado. Só há recebimento confirmado com protocolo do Mercúrio; consultar ou preparar não envia dados."
+            },
+            "guidance": "Pergunte no máximo três itens por vez. Respostas indefinidas ou adiadas ficam em decisions_to_revisit, sem repetir a mesma pergunta automaticamente. Ready_for_human_review significa briefing organizado, não orçamento ou contratação aprovados."
+          },
+          "saved_locally": true,
+          "sent": false
+        }
+      }
+    },
+    {
+      "name": "apex_registrar_lacuna",
+      "input": {
+        "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+        "topic": "manutencao",
+        "reason": "undefined_policy",
+        "consulted_topics": [
+          "manutencao"
+        ],
+        "expected_revision": 0,
+        "confirmation": "registrar_duvida_impessoal_local"
+      },
+      "result": {
+        "ok": true,
+        "base_version": "2026-11-06-orders-v3",
+        "data": {
+          "schema_version": 1,
+          "event_type": "faq_gap_batch",
+          "source": "apex_webmcp",
+          "revision": 1,
+          "events": [
+            {
+              "id": "42c2d1b2-64b8-48f5-8ba5-034c49995513",
+              "created_at": "2026-11-06T22:15:58.712Z",
+              "base_version": "2026-11-06-orders-v3",
+              "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+              "topic": "manutencao",
+              "reason": "undefined_policy",
+              "consulted_topics": [
+                "manutencao"
+              ],
+              "classification_by": "assistant",
+              "editorial_status": "pending_review"
+            }
+          ],
+          "delivery": {
+            "status": "export_only",
+            "sent": false,
+            "destination": "Mercúrio",
+            "message": "Esta consulta não transmite. Dúvidas podem acompanhar um pedido confirmado; o recibo do pedido informa seu envio."
+          },
+          "duplicate": false
+        }
+      }
+    },
+    {
+      "name": "apex_preparar_pedido",
+      "input": {
+        "contact": {
+          "nome": "TESTE FLUXO APEX — NÃO CONTATAR",
+          "email": "teste-fluxo-apex@example.invalid",
+          "telefone": "",
+          "empresa": ""
+        },
+        "message": "Teste fictício autorizado do envio por WebMCP. Validar revisão e FAQ no Mercúrio. Não contatar.",
+        "include_faq": true
+      },
+      "result": {
+        "ok": true,
+        "base_version": "2026-11-06-orders-v3",
+        "data": {
+          "status": "review",
+          "review_id": "apex-87652d7b-c2f7-41bf-a8e4-5e6c99551c84",
+          "sent": false,
+          "receipt": null,
+          "error": null,
+          "busy": false,
+          "review": {
+            "contact": {
+              "email": "teste-fluxo-apex@example.invalid",
+              "empresa": "",
+              "nome": "TESTE FLUXO APEX — NÃO CONTATAR",
+              "telefone": ""
+            },
+            "message": "Teste fictício autorizado do envio por WebMCP. Validar revisão e FAQ no Mercúrio. Não contatar.",
+            "briefing": [
+              {
+                "field": "objective",
+                "label": "Objetivo",
+                "status": "confirmed",
+                "status_label": "Confirmado pelo comprador",
+                "value": "Teste fictício: fluxo de pedido por assistente."
+              }
+            ],
+            "preserved_outside_scope": [],
+            "missing": [
+              {
+                "field": "business",
+                "label": "Negócio"
+              },
+              {
+                "field": "audience",
+                "label": "Público"
+              },
+              {
+                "field": "primary_action",
+                "label": "Ação principal"
+              },
+              {
+                "field": "project_type",
+                "label": "Tipo de projeto"
+              },
+              {
+                "field": "structure",
+                "label": "Páginas e estrutura"
+              },
+              {
+                "field": "content_work",
+                "label": "Trabalho de conteúdo"
+              },
+              {
+                "field": "needs_integrations",
+                "label": "Integrações necessárias"
+              },
+              {
+                "field": "updates",
+                "label": "Atualização depois da entrega"
+              }
+            ],
+            "decisions": [],
+            "dependencies": [],
+            "commercial_pending": [
+              "Preço final por escopo e adicionais",
+              "Condições de pagamento",
+              "Revisões de texto e design",
+              "Prazos e disponibilidade",
+              "Limites da hospedagem e preço após 12 meses",
+              "Domínio e e-mail",
+              "Condições finais dos planos de manutenção",
+              "Propriedade e entrega do código",
+              "Validade da proposta"
+            ],
+            "pricing": {
+              "status": "starting_price",
+              "currency": "BRL",
+              "one_page_from": 1800,
+              "message": "Site de página única a partir de R$ 1.800. O preço final depende do escopo; este valor não inclui automaticamente integrações ou tracking avançado. Não há calculador de orçamento fechado."
+            },
+            "faq_gaps": [
+              {
+                "id": "42c2d1b2-64b8-48f5-8ba5-034c49995513",
+                "created_at": "2026-11-06T22:15:58.712Z",
+                "base_version": "2026-11-06-orders-v3",
+                "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+                "topic": "manutencao",
+                "reason": "undefined_policy",
+                "consulted_topics": [
+                  "manutencao"
+                ]
+              }
+            ],
+            "source": {
+              "page": "http://127.0.0.1:4322/",
+              "tracking": {
+                "field_count": 26,
+                "utm_source": "apex_e2e",
+                "utm_medium": "webmcp",
+                "utm_campaign": "envio_site_webmcp",
+                "other_values_omitted": true
+              }
+            },
+            "notice": "Solicitação de proposta para Ricardo Tocha. O recebimento não confirma contratação, preço final ou prazo. Contato, resumo, briefing e dúvidas exibidas serão enviados ao Mercúrio."
+          }
+        }
+      }
+    },
+    {
+      "name": "apex_atualizar_briefing",
+      "input": {
+        "expected_revision": 1,
+        "changes": [
+          {
+            "field": "traffic_volume",
+            "status": "hypothesis",
+            "value": "Previsão fictícia de 6 mil visitas mensais."
+          }
+        ]
+      },
+      "result": {
+        "ok": true,
+        "base_version": "2026-11-06-orders-v3",
+        "data": {
+          "draft": {
+            "schema_version": 1,
+            "revision": 2,
+            "id": "7688407f-7234-4375-acd7-55abcbe04206",
+            "updated_at": "2026-11-06T22:16:06.024Z",
+            "answers": {
+              "objective": {
+                "status": "confirmed",
+                "value": "Teste fictício: fluxo de pedido por assistente."
+              },
+              "traffic_volume": {
+                "status": "hypothesis",
+                "value": "Previsão fictícia de 6 mil visitas mensais."
+              }
+            }
+          },
+          "evaluation": {
+            "revision": 2,
+            "status": "in_progress",
+            "can_prepare_summary": true,
+            "scope_notes": [],
+            "next_questions": [
+              {
+                "field": "business",
+                "question": "O que sua empresa oferece?",
+                "why": "Contextualizar serviços e conteúdo.",
+                "required": true,
+                "choices": null,
+                "topic": "apex"
+              },
+              {
+                "field": "audience",
+                "question": "Quem precisa usar o site?",
+                "why": "Definir para quem organizar a informação.",
+                "required": true,
+                "choices": null,
+                "topic": "objetivo"
+              },
+              {
+                "field": "primary_action",
+                "question": "O que o visitante precisa conseguir fazer?",
+                "why": "Definir o próximo passo: orçamento, agendamento, contato ou outra ação.",
+                "required": true,
+                "choices": null,
+                "topic": "objetivo"
+              }
+            ],
+            "missing_required": [
+              {
+                "field": "business",
+                "label": "Negócio"
+              },
+              {
+                "field": "audience",
+                "label": "Público"
+              },
+              {
+                "field": "primary_action",
+                "label": "Ação principal"
+              },
+              {
+                "field": "project_type",
+                "label": "Tipo de projeto"
+              },
+              {
+                "field": "structure",
+                "label": "Páginas e estrutura"
+              },
+              {
+                "field": "content_work",
+                "label": "Trabalho de conteúdo"
+              },
+              {
+                "field": "needs_integrations",
+                "label": "Integrações necessárias"
+              },
+              {
+                "field": "updates",
+                "label": "Atualização depois da entrega"
+              }
+            ],
+            "decisions_to_revisit": [
+              {
+                "field": "traffic_volume",
+                "label": "Tráfego mensal",
+                "status": "hypothesis",
+                "value": "Previsão fictícia de 6 mil visitas mensais.",
+                "question": "Quantas sessões ou visitas por mês o site recebe? Informe período e fonte, ou diga se é uma previsão."
+              }
+            ],
+            "retained_inactive": [],
+            "relevant_topics": [
+              "apex",
+              "precos",
+              "envio",
+              "objetivo",
+              "hospedagem"
+            ],
+            "commercial_pending": [
+              "Preço final por escopo e adicionais",
+              "Condições de pagamento",
+              "Revisões de texto e design",
+              "Prazos e disponibilidade",
+              "Limites da hospedagem e preço após 12 meses",
+              "Domínio e e-mail",
+              "Condições finais dos planos de manutenção",
+              "Propriedade e entrega do código",
+              "Validade da proposta"
+            ],
+            "pricing": {
+              "status": "starting_price",
+              "currency": "BRL",
+              "one_page_from": 1800,
+              "message": "Site de página única a partir de R$ 1.800. O preço final depende do escopo; este valor não inclui automaticamente integrações ou tracking avançado. Não há calculador de orçamento fechado."
+            },
+            "submission": {
+              "status": "confirmation_required",
+              "destination": "Mercúrio",
+              "message": "Envio disponível mediante revisão e confirmação explícita. O servidor precisa estar configurado. Só há recebimento confirmado com protocolo do Mercúrio; consultar ou preparar não envia dados."
+            },
+            "guidance": "Pergunte no máximo três itens por vez. Respostas indefinidas ou adiadas ficam em decisions_to_revisit, sem repetir a mesma pergunta automaticamente. Ready_for_human_review significa briefing organizado, não orçamento ou contratação aprovados."
+          },
+          "saved_locally": true,
+          "sent": false
+        }
+      }
+    },
+    {
+      "name": "apex_enviar_pedido",
+      "input": {
+        "review_id": "apex-87652d7b-c2f7-41bf-a8e4-5e6c99551c84",
+        "confirmation": "enviar_pedido_revisado"
+      },
+      "result": {
+        "ok": false,
+        "error": {
+          "code": "review_changed",
+          "message": "O briefing, as dúvidas ou a oferta mudaram. Prepare e confirme uma nova revisão antes de enviar."
+        }
+      }
+    },
+    {
+      "name": "apex_preparar_pedido",
+      "input": {
+        "contact": {
+          "nome": "TESTE FLUXO APEX — NÃO CONTATAR",
+          "email": "teste-fluxo-apex@example.invalid",
+          "telefone": "",
+          "empresa": ""
+        },
+        "message": "Teste fictício autorizado do envio por WebMCP. Validar revisão e FAQ no Mercúrio. Não contatar.",
+        "include_faq": true
+      },
+      "result": {
+        "ok": true,
+        "base_version": "2026-11-06-orders-v3",
+        "data": {
+          "status": "review",
+          "review_id": "apex-9bb2c1c4-6848-4204-8c15-83ec9fd69d88",
+          "sent": false,
+          "receipt": null,
+          "error": null,
+          "busy": false,
+          "review": {
+            "contact": {
+              "email": "teste-fluxo-apex@example.invalid",
+              "empresa": "",
+              "nome": "TESTE FLUXO APEX — NÃO CONTATAR",
+              "telefone": ""
+            },
+            "message": "Teste fictício autorizado do envio por WebMCP. Validar revisão e FAQ no Mercúrio. Não contatar.",
+            "briefing": [
+              {
+                "field": "objective",
+                "label": "Objetivo",
+                "status": "confirmed",
+                "status_label": "Confirmado pelo comprador",
+                "value": "Teste fictício: fluxo de pedido por assistente."
+              },
+              {
+                "field": "traffic_volume",
+                "label": "Tráfego mensal",
+                "status": "hypothesis",
+                "status_label": "Hipótese para revisão",
+                "value": "Previsão fictícia de 6 mil visitas mensais."
+              }
+            ],
+            "preserved_outside_scope": [],
+            "missing": [
+              {
+                "field": "business",
+                "label": "Negócio"
+              },
+              {
+                "field": "audience",
+                "label": "Público"
+              },
+              {
+                "field": "primary_action",
+                "label": "Ação principal"
+              },
+              {
+                "field": "project_type",
+                "label": "Tipo de projeto"
+              },
+              {
+                "field": "structure",
+                "label": "Páginas e estrutura"
+              },
+              {
+                "field": "content_work",
+                "label": "Trabalho de conteúdo"
+              },
+              {
+                "field": "needs_integrations",
+                "label": "Integrações necessárias"
+              },
+              {
+                "field": "updates",
+                "label": "Atualização depois da entrega"
+              }
+            ],
+            "decisions": [
+              {
+                "field": "traffic_volume",
+                "label": "Tráfego mensal",
+                "status": "hypothesis",
+                "value": "Previsão fictícia de 6 mil visitas mensais.",
+                "question": "Quantas sessões ou visitas por mês o site recebe? Informe período e fonte, ou diga se é uma previsão."
+              }
+            ],
+            "dependencies": [],
+            "commercial_pending": [
+              "Preço final por escopo e adicionais",
+              "Condições de pagamento",
+              "Revisões de texto e design",
+              "Prazos e disponibilidade",
+              "Limites da hospedagem e preço após 12 meses",
+              "Domínio e e-mail",
+              "Condições finais dos planos de manutenção",
+              "Propriedade e entrega do código",
+              "Validade da proposta"
+            ],
+            "pricing": {
+              "status": "starting_price",
+              "currency": "BRL",
+              "one_page_from": 1800,
+              "message": "Site de página única a partir de R$ 1.800. O preço final depende do escopo; este valor não inclui automaticamente integrações ou tracking avançado. Não há calculador de orçamento fechado."
+            },
+            "faq_gaps": [
+              {
+                "id": "42c2d1b2-64b8-48f5-8ba5-034c49995513",
+                "created_at": "2026-11-06T22:15:58.712Z",
+                "base_version": "2026-11-06-orders-v3",
+                "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+                "topic": "manutencao",
+                "reason": "undefined_policy",
+                "consulted_topics": [
+                  "manutencao"
+                ]
+              }
+            ],
+            "source": {
+              "page": "http://127.0.0.1:4322/",
+              "tracking": {
+                "field_count": 26,
+                "utm_source": "apex_e2e",
+                "utm_medium": "webmcp",
+                "utm_campaign": "envio_site_webmcp",
+                "other_values_omitted": true
+              }
+            },
+            "notice": "Solicitação de proposta para Ricardo Tocha. O recebimento não confirma contratação, preço final ou prazo. Contato, resumo, briefing e dúvidas exibidas serão enviados ao Mercúrio."
+          }
+        }
+      }
+    },
+    {
+      "name": "apex_enviar_pedido",
+      "input": {
+        "review_id": "apex-9bb2c1c4-6848-4204-8c15-83ec9fd69d88",
+        "confirmation": "enviar_pedido_revisado"
+      },
+      "result": {
+        "ok": true,
+        "base_version": "2026-11-06-orders-v3",
+        "data": {
+          "status": "received",
+          "review_id": "apex-9bb2c1c4-6848-4204-8c15-83ec9fd69d88",
+          "sent": true,
+          "receipt": {
+            "protocolo": "073d4b39-9eab-4eeb-8a07-2e3198042ab9",
+            "status": "NOVO",
+            "reenvio": false
+          },
+          "error": null,
+          "busy": false,
+          "review": {
+            "contact": {
+              "email": "teste-fluxo-apex@example.invalid",
+              "empresa": "",
+              "nome": "TESTE FLUXO APEX — NÃO CONTATAR",
+              "telefone": ""
+            },
+            "message": "Teste fictício autorizado do envio por WebMCP. Validar revisão e FAQ no Mercúrio. Não contatar.",
+            "briefing": [
+              {
+                "field": "objective",
+                "label": "Objetivo",
+                "status": "confirmed",
+                "status_label": "Confirmado pelo comprador",
+                "value": "Teste fictício: fluxo de pedido por assistente."
+              },
+              {
+                "field": "traffic_volume",
+                "label": "Tráfego mensal",
+                "status": "hypothesis",
+                "status_label": "Hipótese para revisão",
+                "value": "Previsão fictícia de 6 mil visitas mensais."
+              }
+            ],
+            "preserved_outside_scope": [],
+            "missing": [
+              {
+                "field": "business",
+                "label": "Negócio"
+              },
+              {
+                "field": "audience",
+                "label": "Público"
+              },
+              {
+                "field": "primary_action",
+                "label": "Ação principal"
+              },
+              {
+                "field": "project_type",
+                "label": "Tipo de projeto"
+              },
+              {
+                "field": "structure",
+                "label": "Páginas e estrutura"
+              },
+              {
+                "field": "content_work",
+                "label": "Trabalho de conteúdo"
+              },
+              {
+                "field": "needs_integrations",
+                "label": "Integrações necessárias"
+              },
+              {
+                "field": "updates",
+                "label": "Atualização depois da entrega"
+              }
+            ],
+            "decisions": [
+              {
+                "field": "traffic_volume",
+                "label": "Tráfego mensal",
+                "status": "hypothesis",
+                "value": "Previsão fictícia de 6 mil visitas mensais.",
+                "question": "Quantas sessões ou visitas por mês o site recebe? Informe período e fonte, ou diga se é uma previsão."
+              }
+            ],
+            "dependencies": [],
+            "commercial_pending": [
+              "Preço final por escopo e adicionais",
+              "Condições de pagamento",
+              "Revisões de texto e design",
+              "Prazos e disponibilidade",
+              "Limites da hospedagem e preço após 12 meses",
+              "Domínio e e-mail",
+              "Condições finais dos planos de manutenção",
+              "Propriedade e entrega do código",
+              "Validade da proposta"
+            ],
+            "pricing": {
+              "status": "starting_price",
+              "currency": "BRL",
+              "one_page_from": 1800,
+              "message": "Site de página única a partir de R$ 1.800. O preço final depende do escopo; este valor não inclui automaticamente integrações ou tracking avançado. Não há calculador de orçamento fechado."
+            },
+            "faq_gaps": [
+              {
+                "id": "42c2d1b2-64b8-48f5-8ba5-034c49995513",
+                "created_at": "2026-11-06T22:15:58.712Z",
+                "base_version": "2026-11-06-orders-v3",
+                "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+                "topic": "manutencao",
+                "reason": "undefined_policy",
+                "consulted_topics": [
+                  "manutencao"
+                ]
+              }
+            ],
+            "source": {
+              "page": "http://127.0.0.1:4322/",
+              "tracking": {
+                "field_count": 26,
+                "utm_source": "apex_e2e",
+                "utm_medium": "webmcp",
+                "utm_campaign": "envio_site_webmcp",
+                "other_values_omitted": true
+              }
+            },
+            "notice": "Solicitação de proposta para Ricardo Tocha. O recebimento não confirma contratação, preço final ou prazo. Contato, resumo, briefing e dúvidas exibidas serão enviados ao Mercúrio."
+          }
+        }
+      }
+    },
+    {
+      "name": "apex_enviar_pedido",
+      "input": {
+        "review_id": "apex-9bb2c1c4-6848-4204-8c15-83ec9fd69d88",
+        "confirmation": "enviar_pedido_revisado"
+      },
+      "result": {
+        "ok": true,
+        "base_version": "2026-11-06-orders-v3",
+        "data": {
+          "status": "received",
+          "review_id": "apex-9bb2c1c4-6848-4204-8c15-83ec9fd69d88",
+          "sent": true,
+          "receipt": {
+            "protocolo": "073d4b39-9eab-4eeb-8a07-2e3198042ab9",
+            "status": "NOVO",
+            "reenvio": false
+          },
+          "error": null,
+          "busy": false,
+          "review": {
+            "contact": {
+              "email": "teste-fluxo-apex@example.invalid",
+              "empresa": "",
+              "nome": "TESTE FLUXO APEX — NÃO CONTATAR",
+              "telefone": ""
+            },
+            "message": "Teste fictício autorizado do envio por WebMCP. Validar revisão e FAQ no Mercúrio. Não contatar.",
+            "briefing": [
+              {
+                "field": "objective",
+                "label": "Objetivo",
+                "status": "confirmed",
+                "status_label": "Confirmado pelo comprador",
+                "value": "Teste fictício: fluxo de pedido por assistente."
+              },
+              {
+                "field": "traffic_volume",
+                "label": "Tráfego mensal",
+                "status": "hypothesis",
+                "status_label": "Hipótese para revisão",
+                "value": "Previsão fictícia de 6 mil visitas mensais."
+              }
+            ],
+            "preserved_outside_scope": [],
+            "missing": [
+              {
+                "field": "business",
+                "label": "Negócio"
+              },
+              {
+                "field": "audience",
+                "label": "Público"
+              },
+              {
+                "field": "primary_action",
+                "label": "Ação principal"
+              },
+              {
+                "field": "project_type",
+                "label": "Tipo de projeto"
+              },
+              {
+                "field": "structure",
+                "label": "Páginas e estrutura"
+              },
+              {
+                "field": "content_work",
+                "label": "Trabalho de conteúdo"
+              },
+              {
+                "field": "needs_integrations",
+                "label": "Integrações necessárias"
+              },
+              {
+                "field": "updates",
+                "label": "Atualização depois da entrega"
+              }
+            ],
+            "decisions": [
+              {
+                "field": "traffic_volume",
+                "label": "Tráfego mensal",
+                "status": "hypothesis",
+                "value": "Previsão fictícia de 6 mil visitas mensais.",
+                "question": "Quantas sessões ou visitas por mês o site recebe? Informe período e fonte, ou diga se é uma previsão."
+              }
+            ],
+            "dependencies": [],
+            "commercial_pending": [
+              "Preço final por escopo e adicionais",
+              "Condições de pagamento",
+              "Revisões de texto e design",
+              "Prazos e disponibilidade",
+              "Limites da hospedagem e preço após 12 meses",
+              "Domínio e e-mail",
+              "Condições finais dos planos de manutenção",
+              "Propriedade e entrega do código",
+              "Validade da proposta"
+            ],
+            "pricing": {
+              "status": "starting_price",
+              "currency": "BRL",
+              "one_page_from": 1800,
+              "message": "Site de página única a partir de R$ 1.800. O preço final depende do escopo; este valor não inclui automaticamente integrações ou tracking avançado. Não há calculador de orçamento fechado."
+            },
+            "faq_gaps": [
+              {
+                "id": "42c2d1b2-64b8-48f5-8ba5-034c49995513",
+                "created_at": "2026-11-06T22:15:58.712Z",
+                "base_version": "2026-11-06-orders-v3",
+                "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+                "topic": "manutencao",
+                "reason": "undefined_policy",
+                "consulted_topics": [
+                  "manutencao"
+                ]
+              }
+            ],
+            "source": {
+              "page": "http://127.0.0.1:4322/",
+              "tracking": {
+                "field_count": 26,
+                "utm_source": "apex_e2e",
+                "utm_medium": "webmcp",
+                "utm_campaign": "envio_site_webmcp",
+                "other_values_omitted": true
+              }
+            },
+            "notice": "Solicitação de proposta para Ricardo Tocha. O recebimento não confirma contratação, preço final ou prazo. Contato, resumo, briefing e dúvidas exibidas serão enviados ao Mercúrio."
+          }
+        }
+      }
+    }
+  ],
+  "mercurio_ui": {
+    "verified": true,
+    "contact": "TESTE FLUXO APEX — NÃO CONTATAR",
+    "orders": 2,
+    "channels": [
+      "site",
+      "webmcp"
+    ],
+    "briefing_and_faq_present_in_both": true
+  }
+}

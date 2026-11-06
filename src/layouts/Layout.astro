@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import BriefingPanel from '../components/BriefingPanel.astro';
+import OrderPanel from '../components/OrderPanel.astro';
 
 interface Props {
   title?: string;
@@ -57,10 +58,12 @@ const {
     <!-- End Google Tag Manager (noscript) -->
     <slot />
     <BriefingPanel />
+    <OrderPanel />
     <script>
       import '../scripts/dialogs';
       import '../scripts/briefing-panel';
       import '../scripts/webmcp';
+      import '../scripts/order-panel';
     </script>
   </body>
 </html>

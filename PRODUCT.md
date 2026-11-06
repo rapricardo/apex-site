@@ -8,7 +8,7 @@
 - Manter a comunicação humana breve, visual e dinâmica, com imagens de projetos reais.
 - Apresentar os trabalhos em uma composição explorável, com detalhes sob demanda.
 - Disponibilizar informação extensa e estruturada ao assistente do comprador.
-- Permitir futuramente consultar orçamento e submeter pedido confirmado pelo cliente.
+- Consultar referências de preço e submeter pedido revisado e confirmado pelo cliente.
 - Receber pedidos no Mercúrio. Ricardo está criando a API e fornecerá o contrato.
 - Consultar e simular não devem registrar contato para abordagem comercial.
 - Em 6 de novembro, Ricardo autorizou implementar o WebMCP com uma base rica para conduzir o briefing; manter envio pendente enquanto termina a API do Mercúrio.
@@ -25,17 +25,17 @@ O briefing tem 31 campos e respostas confirmadas, hipotéticas, indefinidas, adi
 
 O rascunho fica em sessionStorage sob __apex_briefing_v1, separado do tracking. Não há sincronização entre abas nem transmissão a um CRM. O navegador pode restaurar a sessão; o painel e a ferramenta de exclusão removem explicitamente as respostas. Cada alteração exige a revisão atual. Validação do lote ocorre antes de salvar; erros preservam o estado anterior. Textos do comprador são renderizados como texto, sem execução de HTML. Falha de armazenamento impede gravação e mantém a consulta pública utilizável.
 
-O painel Seu briefing permite ler, copiar e apagar. A cópia não é submissão. Nenhum lead é enviado ao Apolo ou Mercúrio pelo novo fluxo. O código antigo e as páginas históricas permanecem no repositório; não participam da nova home. Notificações de lacunas também continuam indisponíveis.
+O painel Seu briefing permite ler, copiar e apagar. A cópia não é submissão. Envio ao Mercúrio acontece apenas pela ação separada de revisão e confirmação do pedido. O código antigo e as páginas históricas permanecem no repositório; não participam da nova home. Dúvidas podem acompanhar o pedido; envio separado de lacunas continua indisponível.
 
 ## Integração prevista
 
 O contrato do Mercúrio foi consultado e testado em 6 de novembro de 2026. Ao implementar o adaptador público, preservar campos, autenticação e semântica do destino. Credenciais ficam no servidor. Submissão exige confirmação sobre escopo e contato, validação do servidor, prevenção de duplicações e identificador retornado pelo destino. Não mostrar sucesso sem confirmação de registro.
 
-Proposta de informações, sem definir o schema da API: contato autorizado; objetivo e briefing; escopo, exclusões e pendências; estimativa e versão das regras; atribuição disponível; identificação da submissão e confirmação do comprador. Transporte, autenticação e confirmação de recebimento da API foram validados no teste técnico abaixo; o fluxo público ainda não está conectado. Preço inicial e propostas de manutenção constam em src/data/offer.ts; o cálculo final depende das regras de escopo.
+Proposta de informações, sem definir o schema da API: contato autorizado; objetivo e briefing; escopo, exclusões e pendências; estimativa e versão das regras; atribuição disponível; identificação da submissão e confirmação do comprador. Transporte, autenticação e confirmação de recebimento da API foram validados no teste técnico abaixo; o fluxo público local está conectado pelo adaptador descrito abaixo. Preço inicial e propostas de manutenção constam em src/data/offer.ts; o cálculo final depende das regras de escopo.
 
 ## Preservação
 
-Manter os identificadores de tracking existentes, a chave __wl_tracking e o evento form_submit_lead. Aplicar os 26 campos hidden quando for implementado um formulário de envio. Esta etapa não cria formulário de lead.
+Manter os identificadores de tracking existentes, a chave __wl_tracking e o evento form_submit_lead. Manter os 26 campos hidden no formulário de pedido e populá-los antes do envio.
 
 ## Verificação desta etapa
 
@@ -53,24 +53,37 @@ Hospedagem gratuita por 12 meses para sites com tráfego moderado, mediante aval
 
 ## Lacunas da FAQ e JSON do Mercúrio
 
-Ricardo informou que a futura API aceitará JSON com os campos estruturados aqui. Os consumidores atuais são ferramentas WebMCP, painel local e documentação pública das ferramentas; nenhum consumidor remoto está conectado. Mantidos IDs dos 25 campos anteriores; seis novos campos opcionais cobrem tráfego, picos, e-mail, manutenção, tracking avançado e imagens.
+Ricardo informou que a futura API aceitará JSON com os campos estruturados aqui. Os consumidores atuais são ferramentas WebMCP, painel local e documentação pública das ferramentas; o Mercúrio recebe agora o pedido confirmado pelo adaptador descrito abaixo. Mantidos IDs dos 25 campos anteriores; seis novos campos opcionais cobrem tráfego, picos, e-mail, manutenção, tracking avançado e imagens.
 
 As lacunas usam armazenamento separado __apex_faq_gaps_v1, com revisão, limite de 50 registros, validação antes de salvar e deduplicação local por pergunta normalizada, assunto e motivo. Não mudam o schema do briefing nem o tracking. Busca sem resultado não registra automaticamente uma lacuna. O assistente lê a base, identifica o que falta, remove detalhes pessoais e registra somente com autorização do comprador. A validação recusa e-mail, URLs e sequências comuns de telefone; não substitui revisão de nomes e detalhes privados pelo assistente.
 
 Contrato proposto de exportação: schema_version=1; event_type=faq_gap_batch; source=apex_webmcp; revision; events; delivery. Cada evento contém id estável, created_at, base_version, question_summary, topic, reason, consulted_topics, classification_by=assistant e editorial_status=pending_review. Não inclui contato, briefing, transcrição ou URL do visitante. Os IDs permitem deduplicar um reenvio futuro. Motivos: not_documented, partial_answer, undefined_policy, needs_evaluation, conflicting_information.
 
-O código e os schemas canônicos estão em src/lib/faq-gaps.ts. A ferramenta de consulta e o painel exportam exatamente esse JSON. delivery permanece local_only e sent=false. Apagar dúvidas preserva briefing; apagar briefing preserva dúvidas, que possuem controle próprio. Nenhuma lacuna é recebida pelo Mercúrio nem publicada automaticamente na FAQ. A futura integração deverá registrar recebimento confirmado e permitir agrupamento e revisão editorial.
+O código e os schemas canônicos estão em src/lib/faq-gaps.ts. A ferramenta de consulta e o painel exportam exatamente esse JSON. A exportação permanece sent=false, com delivery.status=export_only; ela não realiza envio. Apagar dúvidas preserva briefing; apagar briefing preserva dúvidas, que possuem controle próprio. Lacunas selecionadas acompanham o pedido confirmado em dados.faq_gaps; não são publicadas automaticamente na FAQ. O endpoint separado para dúvidas continua futuro.
 
 Verificação incremental desta atualização: artifacts/faq-gaps-e2e.json registra a sequência reproduzível no navegador, incluindo classificação, duplicação, revisão antiga, rejeição de e-mail, persistência e exclusão pela interface. artifacts/faq-gap-payload-example.json contém o JSON de um exemplo fictício efetivamente registrado, removido da sessão após a verificação. Após recarga, os identificadores WebMCP retornaram estado expirado; persistência e exclusão foram verificadas pela interface. Build e checagem TypeScript restrita a src passaram.
 
 ## Contrato do Mercúrio e teste técnico — 6 de novembro de 2026
 
-Fonte: https://app.mercurio.ia.br/configuracoes/captacao-leads, consultada na sessão autenticada de Ricardo. POST https://app.mercurio.ia.br/api/webhooks/leads; autenticação Authorization: Bearer. Chave local em .env.local, variável MERCURIO_LEADS_API_KEY, fora do Git e sem prefixo PUBLIC_. Na futura publicação, configurar como segredo do servidor; nunca incluir no JavaScript entregue ao navegador. O Apex ainda é estático e não possui adaptador público de envio.
+Fonte: https://app.mercurio.ia.br/configuracoes/captacao-leads, consultada na sessão autenticada de Ricardo. POST https://app.mercurio.ia.br/api/webhooks/leads; autenticação Authorization: Bearer. Chave local em .env.local, variável MERCURIO_LEADS_API_KEY, fora do Git e sem prefixo PUBLIC_. Na futura publicação, configurar como segredo do servidor; nunca incluir no JavaScript entregue ao navegador. O Apex gera páginas estáticas e usa a Pages Function functions/api/pedidos.ts para envio; a chave permanece no servidor.
 
-Campos: id_envio estável (até 100 letras, números e . _ : -), nome e pelo menos email ou telefone; empresa/cnpj opcionais; servico_id=67 identifica Site no catálogo consultado; interesse/mensagem são texto; pagina, utm_source, utm_medium, utm_campaign e ref preservam origem. dados aceita objeto JSON até 48 KB; _gotcha deve ficar vazio. Demais campos de tracking da Apex continuam preservados em seu contrato e podem integrar dados no adaptador futuro, sem substituir os campos reconhecidos pelo Mercúrio.
+Campos: id_envio estável (até 100 letras, números e . _ : -), nome e pelo menos email ou telefone; empresa/cnpj opcionais; servico_id=67 identifica Site no catálogo consultado; interesse/mensagem são texto; pagina, utm_source, utm_medium, utm_campaign e ref preservam origem. dados aceita objeto JSON até 48 KB; _gotcha deve ficar vazio. Demais campos de tracking da Apex continuam preservados em seu contrato e integram dados no adaptador atual, sem substituir os campos reconhecidos pelo Mercúrio.
 
-Resposta: 201 com protocolo, status e reenvio=false para novo pedido; repetição do mesmo id_envio retorna 200 com o mesmo protocolo e reenvio=true. Erros: 400 com campos, 401 para chave inválida e 429 com Retry-After. A implementação futura só deve confirmar recebimento com protocolo válido e manter o mesmo id_envio em uma tentativa de reenvio.
+Resposta: 201 com protocolo, status e reenvio=false para novo pedido; repetição do mesmo id_envio retorna 200 com o mesmo protocolo e reenvio=true. Erros: 400 com campos, 401 para chave inválida e 429 com Retry-After. A implementação só deve confirmar recebimento com protocolo válido e manter o mesmo id_envio em uma tentativa de reenvio.
 
 Este endpoint cria leads e exige contato. Lacunas da FAQ podem acompanhar o pedido autorizado em dados.faq_gaps. Para receber somente lacunas, sem criar lead, será necessário um endpoint próprio; não fabricar contato para contornar essa exigência. O registro fictício abaixo é exclusivamente teste técnico autorizado por Ricardo.
 
 scripts/test-mercurio.mjs lê a chave sem exibi-la, usa curl com cabeçalho pelo stdin, envia registro claramente identificado e verifica idempotência. Reproduzir com node scripts/test-mercurio.mjs --id=apex-test-20261106-01; esse ID reutiliza o pedido já testado. O arquivo artifacts/apex-test-20261106-01.json registra payload e respostas sem chave. Primeira chamada: 201; segunda: 200; protocolo 67943e6d-8109-4889-a7e9-b1389afefb87. Conferido na interface: um pedido no lead TESTE TÉCNICO APEX — NÃO CONTATAR, com briefing, estimativa e faq_gaps preservados. O lead foi mantido para revisão. Nenhuma mensagem foi enviada a terceiros.
+
+
+## Envio pelo site e WebMCP — 6 de novembro de 2026
+
+Ricardo autorizou conectar ambos os caminhos ao Mercúrio e enviar dúvidas da FAQ junto do pedido. Endpoint separado de dúvidas fica para depois. Formulário e ferramentas compartilham src/lib/orders.ts, validação em src/lib/order-contract.ts e servidor em src/server/orders.ts. O contrato existente do destino foi preservado; dados recebe briefing, escopo, pendências, referência de preço, dúvidas, origem e confirmação.
+
+Fluxo: nome, e-mail ou telefone e resumo; revisão do contato e conteúdo; confirmação explícita daquela revisão; envio; protocolo. Briefing incompleto pode seguir com pendências identificadas. WebMCP oferece apex_preparar_pedido, apex_consultar_pedido e apex_enviar_pedido. Alterar briefing ou dúvidas incluídas invalida uma revisão ainda não enviada. Depois de tentativa sem confirmação, o pedido e seu id_envio ficam preservados para repetir com segurança. Recebimento não confirma contratação, preço final ou prazo.
+
+O formulário mantém os 26 hidden fields inicialmente vazios. A captura roda antes do formulário, preenche os campos antes do envio e preserva __wl_tracking, window.__wlTracking e form_submit_lead. Analytics recebe apenas identificação do formulário/canal; contato e briefing não entram nesse evento. O servidor valida origem, formato, contato, respostas, limites e protocolo retornado. Chave nunca integra o bundle público.
+
+Desenvolvimento: npm run dev -- --host 127.0.0.1 --port 4322 usa .env.local e o mesmo handler, com transporte curl local. Publicação Cloudflare Pages usa functions/api/pedidos.ts com fetch nativo e requer MERCURIO_LEADS_API_KEY como segredo. Esta entrega não configura ambiente remoto nem publica o site.
+
+Verificação: artifacts/orders-e2e.json registra chamadas reais, inputs reproduzíveis e protocolos. Formulário recusou ausência de contato e exigiu confirmação; WebMCP recusou revisão antiga e devolveu o mesmo protocolo na repetição. Mercúrio exibiu dois pedidos, canais site e webmcp, com briefing e dúvidas, no contato fictício TESTE FLUXO APEX — NÃO CONTATAR. Registros mantidos para conferência. Build Astro e TypeScript de src, functions e adaptador local passaram. Execução na infraestrutura Cloudflare e falhas de rede/quota não foram exercitadas nesta etapa.

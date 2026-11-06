@@ -15,7 +15,7 @@ export const updateSchema = objectSchema({
 });
 export const clearSchema = objectSchema({ expected_revision: revisionSchema, confirmation: enumSchema(['apagar_rascunho_local']) });
 
-function validateAnswer(field: Field, answer: Answer) {
+export function validateAnswer(field: Field, answer: Answer) {
   validate(answerSchema, answer, field.id);
   if (answer.status === 'confirmed' || answer.status === 'hypothesis') {
     if (!answer.value.trim()) throw new InputError('invalid_answer', `${field.id}: informe o conteúdo ou use status unknown/deferred.`);
@@ -139,7 +139,7 @@ export function prepareSummary(draft = readDraft()) {
     '', '## Pontos de escopo para avaliação', ...evaluation.scope_notes.map(note => `- ${note}`),
     ...(evaluation.scope_notes.length ? [] : ['- Ainda sem dependências específicas identificadas.']),
     '', '## Condições a confirmar com Ricardo', ...offer.unresolved_terms.map(item => `- ${item}`),
-    '', 'Envio ao Mercúrio indisponível. Nenhum dado foi encaminhado.',
+    '', 'Preparar este resumo não envia dados. Para solicitar uma proposta, revise e confirme o pedido ao Mercúrio.',
   ];
   return { kind: 'briefing_draft', version: knowledgeVersion, revision: draft.revision, entries, evaluation, text: lines.join('\n'), sent: false, price: null };
 }

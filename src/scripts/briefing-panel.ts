@@ -84,7 +84,7 @@ function renderGaps() {
     const payload = gapPayload();
     gapRevision = payload.revision;
     gapText.textContent = JSON.stringify(payload, null, 2);
-    gapStatus.textContent = `${payload.events.length} dúvida(s) registrada(s) nesta aba. Nenhuma enviada.`;
+    gapStatus.textContent = `${payload.events.length} dúvida(s) registrada(s) nesta aba. Podem acompanhar um pedido revisado e confirmado.`;
     gapCopy.disabled = gapClear.disabled = payload.events.length === 0;
   } catch (error) {
     gapText.textContent = '';

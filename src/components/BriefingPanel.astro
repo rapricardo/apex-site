@@ -2,13 +2,13 @@
   <button class="dialog-close" data-close aria-label="Fechar">×</button>
   <p class="eyebrow">Seu projeto, até aqui</p>
   <h2 id="briefing-title">Seu briefing.</h2>
-  <p>As informações registradas pelo seu assistente aparecem aqui. O rascunho fica apenas nesta aba e não é enviado à Apex.</p>
+  <p>As informações registradas pelo seu assistente aparecem aqui. O rascunho fica nesta aba. Só será enviado à Apex quando você revisar e confirmar um pedido.</p>
   <p data-draft-status role="status" aria-live="polite"></p>
   <div id="briefing-entries" class="briefing-entries"></div>
   <details class="briefing-summary"><summary>Ler o resumo completo</summary><pre id="briefing-summary-text"></pre></details>
   <div class="briefing-actions"><button class="button button-blue" id="copy-briefing" disabled>Copiar resumo ↗</button><button class="text-button" id="clear-briefing" disabled>Apagar rascunho</button></div>
   <p id="briefing-feedback" role="status" aria-live="polite"></p>
-  <div class="availability-note"><strong>Nenhum pedido foi enviado.</strong><p>O rascunho ajuda a definir o projeto. Valores, prazo e condições precisam ser confirmados; o envio de pedidos ainda está indisponível.</p></div>
+  <div class="availability-note"><strong>Pronto para pedir uma proposta?</strong><p>Revise o projeto e o contato antes de confirmar. Valores, prazo e condições serão definidos na proposta.</p><button class="button button-blue" data-dialog="order-dialog">Revisar e enviar pedido ↗</button></div>
   <details><summary>Como corrigir uma informação?</summary><p>Peça ao seu assistente para atualizar o briefing nesta página. Sugestões ficam como hipóteses até você confirmar. Você também pode copiar o resumo para revisar por conta própria.</p></details>
   <details class="briefing-summary"><summary>Dúvidas para melhorar a FAQ</summary><p>Somente perguntas impessoais autorizadas, separadas do briefing. A classificação será revisada antes de virar resposta pública.</p><p id="gap-status" role="status" aria-live="polite"></p><div class="briefing-actions"><button class="text-button" id="copy-gaps" disabled>Copiar JSON</button><button class="text-button" id="clear-gaps" disabled>Apagar dúvidas</button></div><pre id="gap-json"></pre></details>
 </dialog>

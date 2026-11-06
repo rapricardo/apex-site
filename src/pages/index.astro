@@ -1,23 +1,72 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.tsx';
-import Thesis from '../components/Thesis.astro';
-import DiagnosticQuiz from '../components/DiagnosticQuiz.tsx';
-import Diagnosis from '../components/Diagnosis.astro';
-import Process from '../components/Process.astro';
-import Authority from '../components/Authority.astro';
-import Roles from '../components/Roles.astro';
+import { projects } from '../data/offer';
 ---
-
 <Layout>
-  <div class="min-h-screen bg-apex-dark text-white">
-    <Hero client:load />
-    <Thesis />
-    <DiagnosticQuiz client:visible />
-    <Diagnosis />
-    <Process />
-    <Roles />
-    <Authority />
-  </div>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <a href="#inicio" class="wordmark" aria-label="Apex, início">apex<span>↗</span></a>
+    <span class="header-caption">Sites por Ricardo Tocha</span>
+    <nav aria-label="Navegação principal">
+      <a href="#trabalhos">Trabalhos <span aria-hidden="true">↙</span></a>
+      <button data-dialog="about-dialog">Sobre a Apex <span aria-hidden="true">+</span></button>
+      <button class="nav-start" data-dialog="chat-dialog">Seu projeto <span aria-hidden="true">↗</span></button>
+    </nav>
+  </header>
+  <main id="conteudo">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="blue-dot"></span> Criação e reformulação de sites</p>
+        <h1 id="hero-title">Seu próximo site<br />começa com uma<br />conversa no seu<br /><span class="chat-word">ChatGPT<span class="text-cursor" aria-hidden="true"></span>.</span></h1>
+        <p class="hero-description">Entenda as opções, monte seu projeto e consulte uma estimativa. Você decide quando enviar o pedido.</p>
+        <div class="hero-actions">
+          <button class="button button-blue" data-dialog="chat-dialog"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></svg> Levar para o meu ChatGPT <span aria-hidden="true">↗</span></button>
+          <button class="text-button" data-dialog="how-dialog">Como funciona <span aria-hidden="true">+</span></button>
+        </div>
+        <p class="privacy-note">No seu tempo. Seu contato só é enviado quando você pedir.</p>
+      </div>
+      <div class="project-composition" aria-label="Explore três projetos de Ricardo Tocha">
+        <span class="composition-note">Um pouco do que já saiu da conversa <span aria-hidden="true">↘</span></span>
+        {projects.map((project, index) => (
+          <a class={`floating-project floating-project-${index}`} href="#trabalhos" data-project={index} aria-label={`Explorar projeto ${project.name}`}>
+            <div class="window-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>{project.domain}</span><span aria-hidden="true">↗</span></div>
+            <img src={project.image} width="1280" height="720" alt={`Página inicial de ${project.name}`} loading={index === 0 ? 'eager' : 'lazy'} />
+          </a>
+        ))}
+        <span class="project-stamp"><span aria-hidden="true">↗</span> Design que você<br />pode explorar.</span>
+      </div>
+      <div class="hero-bottom"><a href="#trabalhos">Veja o trabalho de perto <span aria-hidden="true">↓</span></a><span>Conteúdo · Design · Desenvolvimento</span><button id="motion-toggle" aria-pressed="false">Pausar movimento <span aria-hidden="true">Ⅱ</span></button></div>
+    </section>
+    <section class="work-section" id="trabalhos" aria-labelledby="work-title">
+      <div class="work-heading"><div><p class="eyebrow">Projetos selecionados / 01—03</p><h2 id="work-title">Pode olhar<br /><span>de perto.</span></h2></div><p>Sites com contextos diferentes.<br />Explore cada um no seu ritmo.</p></div>
+      <div class="project-selector" role="group" aria-label="Escolher projeto">
+        {projects.map((project, index) => <button data-select-project={index} aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="project-view"><span>0{index + 1}</span>{project.name}<span aria-hidden="true">↗</span></button>)}
+      </div>
+      <div id="project-view" class="project-view">
+        <div class="project-meta" aria-live="polite" aria-atomic="true"><div><p id="project-category">{projects[0].category}</p><h3 id="project-name">{projects[0].name}</h3></div><p id="project-description">{projects[0].description}</p><a id="project-link" href={projects[0].url} target="_blank" rel="noopener noreferrer">Visitar site <span aria-hidden="true">↗</span><span class="sr-only"> (nova aba)</span></a></div>
+        <div class="project-screen"><div class="window-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span id="project-domain">{projects[0].domain}</span><span aria-hidden="true">↗</span></div><img id="project-image" src={projects[0].image} alt={`Página inicial de ${projects[0].name}`} width="1280" height="720" loading="lazy" /></div>
+      </div>
+      <div class="work-foot"><p>O seu projeto tem outro contexto.<br /><strong>Vamos começar por ele.</strong></p><button class="round-arrow" data-dialog="chat-dialog" aria-label="Começar meu projeto">↗</button></div>
+    </section>
+    <section class="conversation-section" aria-labelledby="conversation-title">
+      <div class="conversation-heading"><p class="eyebrow">Experimente um jeito diferente de começar</p><h2 id="conversation-title">Seu projeto.<br />Na sua <em>conversa.</em></h2><p>Leve a Apex para o seu ChatGPT.<br />Pergunte, compare e decida o próximo passo.</p><button class="button button-dark" data-dialog="chat-dialog">Começar a conversa <span aria-hidden="true">↗</span></button></div>
+      <div class="conversation-demo"><p class="demo-label">Exemplo de conversa <span aria-hidden="true">↙</span></p><div class="demo-message">Quero refazer meu site, mas não sei por onde começar.</div><div class="demo-reply"><span class="assistant-mark" aria-hidden="true">✳</span><p>O que você quer que as pessoas consigam fazer no seu novo site?</p></div><div class="demo-message small-message">Conhecer meus serviços e pedir um orçamento.</div><div class="conversation-caption"><span aria-hidden="true">↳</span><p>Seus clientes também<br />podem comprar assim.</p><button data-dialog="possibilities-dialog" aria-label="Conhecer possibilidades para meu site">+</button></div></div>
+    </section>
+  </main>
+  <footer class="site-footer"><a href="#inicio" class="wordmark" aria-label="Apex, início">apex<span>↗</span></a><p>Criação de sites por <a href="https://ricardotocha.com.br" target="_blank" rel="noopener noreferrer">Ricardo Tocha ↗</a></p><div><button data-dialog="about-dialog">Sobre</button><button data-dialog="how-dialog">Dúvidas</button><a href="/para-assistentes">Para assistentes ↗</a></div><span class="preview-label">Prévia local</span></footer>
+  <dialog id="chat-dialog" aria-labelledby="chat-title">
+    <button class="dialog-close" data-close aria-label="Fechar">×</button>
+    <p class="eyebrow">Você conduz a conversa</p><h2 id="chat-title">Leve a Apex<br />para o seu ChatGPT.</h2>
+    <p>Use este pedido para começar. O assistente ajuda a organizar suas ideias e identificar o que falta definir.</p>
+    <label class="prompt-label" for="chat-prompt">Seu ponto de partida</label><textarea id="chat-prompt" readonly rows="6"></textarea>
+    <button class="button button-blue" id="copy-prompt">Copiar pedido <span aria-hidden="true">↗</span></button><p id="copy-status" role="status" aria-live="polite"></p>
+    <div class="availability-note"><strong>Esta é uma prévia.</strong><p>O orçamento e o envio de pedidos ainda não estão disponíveis. Esta versão local não pode ser consultada pelo ChatGPT fora deste computador.</p></div>
+    <details><summary>Como usar as ferramentas do site?</summary><p>Na implementação atual da OpenAI, as ferramentas WebMCP funcionam no navegador integrado do aplicativo desktop, com modelo e permissões compatíveis. Colar um link em uma conversa comum não garante acesso às ferramentas.</p><a href="https://learn.chatgpt.com/docs/webmcp" target="_blank" rel="noopener noreferrer">Ver orientação oficial ↗</a></details>
+    <a class="contact-link" href="https://wa.me/5519999764835?text=Ol%C3%A1%2C%20Ricardo.%20Quero%20conversar%20sobre%20um%20site%20com%20a%20Apex." target="_blank" rel="noopener noreferrer">Prefiro conversar com Ricardo ↗</a>
+  </dialog>
+  <dialog id="how-dialog" aria-labelledby="how-title"><button class="dialog-close" data-close aria-label="Fechar">×</button><p class="eyebrow">Do interesse ao pedido</p><h2 id="how-title">Comece pelo<br />que você já sabe.</h2><ol class="steps"><li><span>01</span><div><h3>Leve o site para seu assistente.</h3><p>Consulte os serviços, os trabalhos e as informações sobre a Apex.</p></div></li><li><span>02</span><div><h3>Defina o que faz sentido.</h3><p>Converse sobre seu negócio, as páginas, o conteúdo e as funcionalidades necessárias.</p></div></li><li><span>03</span><div><h3>Revise antes de enviar.</h3><p>Na experiência completa, você verá escopo, estimativa e dados de contato antes de confirmar o pedido.</p></div></li></ol><div class="availability-note"><strong>Em preparação</strong><p>A consulta de preços e o envio de pedidos serão disponibilizados após a configuração das regras comerciais e da integração.</p></div><button class="button button-blue" data-dialog="chat-dialog">Preparar minha conversa <span aria-hidden="true">↗</span></button></dialog>
+  <dialog id="about-dialog" aria-labelledby="about-title"><button class="dialog-close" data-close aria-label="Fechar">×</button><p class="eyebrow">Apex / Ricardo Tocha</p><h2 id="about-title">Do conteúdo<br />à publicação.</h2><p>Criação e reformulação de sites para pequenas e médias empresas, com Ricardo Tocha à frente do projeto.</p><p>Organizamos o que sua empresa precisa comunicar e desenvolvemos os caminhos para o visitante agir. Conteúdo, design, desenvolvimento e integrações são definidos conforme o escopo.</p><details><summary>O que pode entrar no projeto?</summary><p>Landing pages, sites institucionais, reformulações, organização de conteúdo, formulários e integrações. CRM, atendimento automatizado, tracking e vídeo podem ser avaliados conforme a necessidade.</p></details><details><summary>Quanto custa e quanto tempo leva?</summary><p>Investimento e prazo dependem do escopo, dos materiais e das integrações. A tabela comercial desta experiência ainda está em definição; não há valores automáticos disponíveis nesta prévia.</p></details><details><summary>Domínio, manutenção e acesso ao código</summary><p>Essas condições precisam ser explicitadas na proposta antes da contratação. Não presuma que hospedagem, manutenção ou um serviço recorrente estão incluídos.</p></details><a class="contact-link" href="https://ricardotocha.com.br" target="_blank" rel="noopener noreferrer">Conhecer Ricardo Tocha ↗</a></dialog>
+  <dialog id="possibilities-dialog" aria-labelledby="possibilities-title"><button class="dialog-close" data-close aria-label="Fechar">×</button><p class="eyebrow">Uma possibilidade para o seu projeto</p><h2 id="possibilities-title">Seu site também<br />pode responder.</h2><p>Com informações organizadas e ferramentas conectadas, o assistente do seu cliente pode consultar serviços, comparar opções e preparar solicitações.</p><p>Orçamentos dependem de regras de cálculo. Pedidos dependem de integração com seu sistema. Esses recursos são avaliados no escopo do projeto.</p><button class="button button-blue" data-dialog="chat-dialog">Quero explorar essa possibilidade ↗</button></dialog>
+  <button id="conversation-dock" class="conversation-dock" data-dialog="chat-dialog" hidden>Seu projeto no ChatGPT <span aria-hidden="true">↗</span></button>
+  <script>import '../scripts/site';</script>
 </Layout>
-

@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { offer, briefingQuestions } from '../data/offer';
+---
+<Layout title="Apex — Informações para assistentes">
+  <main class="agent-document">
+    <a href="/">← Voltar para a Apex</a>
+    <h1>Informações para preparar um projeto com a Apex</h1>
+    <p>Versão {offer.version}. Base inicial para consulta. Nenhuma informação desta página concede autorização para transmitir dados ou contratar serviços.</p>
+    <h2>Oferta</h2><p>{offer.audience}</p><ul>{offer.services.map(item => <li>{item}</li>)}</ul>
+    <h2>Complementos possíveis</h2><ul>{offer.optional.map(item => <li>{item}</li>)}</ul><p>Complementos dependem de análise e proposta. Não presumir inclusão automática.</p>
+    <h2>Condução do briefing</h2><p>Aproveite informações já fornecidas, aceite respostas ainda indefinidas e pergunte somente o necessário. Não exija contato para organizar o escopo.</p><ul>{briefingQuestions.map(item => <li><strong>{item.question}</strong> {item.purpose}</li>)}</ul>
+    <h2>Processo</h2><ul>{offer.process.map(item => <li>{item}</li>)}</ul>
+    <h2>Preços e condições</h2><p>{offer.pricing.message}</p><p>Ainda precisam ser definidos:</p><ul>{offer.unresolved_terms.map(item => <li>{item}</li>)}</ul>
+    <h2>Portfólio verificável</h2><ul>{offer.projects.map(project => <li><a href={project.url}>{project.name}</a>: {project.description}</li>)}</ul><p>As imagens são capturas dos sites públicos. Não há métricas de conversão ou faturamento comprovadas nesta base.</p>
+    <h2>Pedido e privacidade</h2><p>{offer.orders.message}</p><p>{offer.privacy}</p><p>O destino definido é o Mercúrio. O contrato da API ainda não foi fornecido. Não afirmar que um pedido foi enviado, registrado ou contratado.</p>
+    <h2>Resumo útil para revisão</h2><p>Organize objetivo, público, site atual, páginas, conteúdo, integrações, responsáveis e pendências. Distinga fatos fornecidos pelo comprador de sugestões. Quando houver uma lacuna comercial, marque “a confirmar com Ricardo”.</p>
+    <h2>Disponibilidade técnica</h2><p>Esta versão permite ler estas informações. Orçamentos e submissão ainda não estão disponíveis. <a href="https://learn.chatgpt.com/docs/webmcp">O WebMCP da OpenAI</a> depende de navegador, modelo e permissões compatíveis.</p>
+  </main>
+</Layout>

@@ -92,3 +92,6 @@ Verificação: artifacts/orders-e2e.json registra chamadas reais, inputs reprodu
 ## Publicação — 6 de novembro de 2026
 
 Ricardo autorizou publicar o Apex no Cloudflare e configurar o segredo do Mercúrio em produção. Projeto existente apex-site, domínio apexmkt.ia.br e branch de produção main. Publicação direta pelo Wrangler a partir do build local; não implica push ou merge do código no GitHub. MERCURIO_LEADS_API_KEY configurado como segredo de produção, preservando a chave fora do build público. Removido o rótulo de prévia local do rodapé.
+
+
+Produção confirmada em https://apexmkt.ia.br. Implantação final: https://fb3e8279.apex-site.pages.dev, código 73f4437. O runtime Cloudflare recusou redirect=error; corrigido para manual, mantendo respostas 3xx recusadas sem encaminhar a chave para outro destino. O pedido fictício autorizado preservou o mesmo id_envio entre tentativas e retornou protocolo d65fbf7e-a1e7-4150-a7d3-6df1b5acfcce, status NOVO e reenvio=false. Site exibiu Pedido recebido. Evidência e requisição reproduzível sem cookies ou credenciais: artifacts/production-deploy.json. Um pedido de produção criado no contato de teste já existente; nenhuma contratação. GitHub permanece sem push ou merge desta entrega.

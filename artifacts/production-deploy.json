@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-06",
+  "domain": "https://apexmkt.ia.br",
+  "deployment": "https://fb3e8279.apex-site.pages.dev",
+  "project": "apex-site",
+  "production_branch": "main",
+  "source_commit": "73f4437",
+  "deployment_method": "wrangler direct upload",
+  "production_secret": "MERCURIO_LEADS_API_KEY configured as secret_text; value omitted",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200,
+      "new_site": true,
+      "preview_label_removed": true
+    },
+    {
+      "route": "/para-assistentes",
+      "status": 308
+    },
+    {
+      "route": "/apex-context.json",
+      "status": 200
+    },
+    {
+      "route": "/api/pedidos",
+      "status": 405,
+      "response": {
+        "error": "Use POST para enviar o pedido."
+      }
+    }
+  ],
+  "submission": {
+    "synthetic": true,
+    "review_id": "apex-8a6671fb-4267-46ce-b908-12e0541bf112",
+    "receipt": {
+      "protocolo": "d65fbf7e-a1e7-4150-a7d3-6df1b5acfcce",
+      "status": "NOVO",
+      "reenvio": false
+    },
+    "channel": "webmcp",
+    "faq_included": true,
+    "verified_in_ui": true
+  },
+  "runtime_fix": "Cloudflare Workers requires redirect manual instead of error; 3xx responses remain rejected.",
+  "repeatable_request": {
+    "order": {
+      "schema_version": 1,
+      "id_envio": "apex-8a6671fb-4267-46ce-b908-12e0541bf112",
+      "channel": "webmcp",
+      "base_version": "2026-11-06-orders-v3",
+      "contact": {
+        "email": "teste-fluxo-apex@example.invalid",
+        "empresa": "",
+        "nome": "TESTE FLUXO APEX — NÃO CONTATAR",
+        "telefone": ""
+      },
+      "message": "Teste fictício do deploy em produção, autorizado para conferir a integração Apex e Mercúrio. Não contatar. Não constitui pedido comercial.",
+      "briefing_revision": 1,
+      "answers": [
+        {
+          "field": "objective",
+          "status": "confirmed",
+          "value": "Teste fictício de publicação: conferir envio ao Mercúrio pelo Cloudflare."
+        }
+      ],
+      "gaps_revision": 1,
+      "faq_gaps": [
+        {
+          "id": "bd8efb31-489f-400a-a650-fd92c04c8dbf",
+          "created_at": "2026-11-06T22:47:03.111Z",
+          "base_version": "2026-11-06-orders-v3",
+          "question_summary": "As horas de alterações não utilizadas acumulam para o próximo mês?",
+          "topic": "manutencao",
+          "reason": "undefined_policy",
+          "consulted_topics": [
+            "manutencao"
+          ]
+        }
+      ],
+      "tracking": {
+        "utm_source": "apex_e2e",
+        "utm_medium": "production_check",
+        "utm_campaign": ""
+      },
+      "pagina": "https://apexmkt.ia.br/",
+      "_gotcha": ""
+    },
+    "confirmation": "enviar_pedido_revisado"
+  },
+  "reproduction": "Reenviar repeatable_request via POST /api/pedidos com Content-Type application/json e Origin https://apexmkt.ia.br. Preservar id_envio do teste para consultar o mesmo recebimento; não alterar para criar outro pedido sem autorização."
+}

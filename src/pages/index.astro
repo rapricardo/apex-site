@@ -27,7 +27,7 @@ import { projects, offer } from '../data/offer';
       </div>
       <div class="project-composition" aria-label="Explore três projetos de Ricardo Tocha">
         <span class="composition-note">Um pouco do que já saiu da conversa <span aria-hidden="true">↘</span></span>
-        {projects.map((project, index) => (
+        {projects.slice(0, 3).map((project, index) => (
           <a class={`floating-project floating-project-${index}`} href="#trabalhos" data-project={index} aria-label={`Explorar projeto ${project.name}`}>
             <div class="window-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>{project.domain}</span><span aria-hidden="true">↗</span></div>
             <img src={project.image} width="1280" height="720" alt={`Página inicial de ${project.name}`} loading={index === 0 ? 'eager' : 'lazy'} />
@@ -38,9 +38,9 @@ import { projects, offer } from '../data/offer';
       <div class="hero-bottom"><a href="#trabalhos">Veja o trabalho de perto <span aria-hidden="true">↓</span></a><span>Conteúdo · Design · Desenvolvimento</span><button id="motion-toggle" aria-pressed="false">Pausar movimento <span aria-hidden="true">Ⅱ</span></button></div>
     </section>
     <section class="work-section" id="trabalhos" aria-labelledby="work-title">
-      <div class="work-heading"><div><p class="eyebrow">Projetos selecionados / 01—03</p><h2 id="work-title">Pode olhar<br /><span>de perto.</span></h2></div><p>Sites com contextos diferentes.<br />Explore cada um no seu ritmo.</p></div>
+      <div class="work-heading"><div><p class="eyebrow">Projetos selecionados / 01—{String(projects.length).padStart(2, '0')}</p><h2 id="work-title">Pode olhar<br /><span>de perto.</span></h2></div><p>Sites com contextos diferentes.<br />Explore cada um no seu ritmo.</p></div>
       <div class="project-selector" role="group" aria-label="Escolher projeto">
-        {projects.map((project, index) => <button data-select-project={index} aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="project-view"><span>0{index + 1}</span>{project.name}<span aria-hidden="true">↗</span></button>)}
+        {projects.map((project, index) => <button data-select-project={index} aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="project-view"><span>{String(index + 1).padStart(2, '0')}</span>{project.name}<span aria-hidden="true">↗</span></button>)}
       </div>
       <div id="project-view" class="project-view">
         <div class="project-meta" aria-live="polite" aria-atomic="true"><div><p id="project-category">{projects[0].category}</p><h3 id="project-name">{projects[0].name}</h3></div><p id="project-description">{projects[0].description}</p><a id="project-link" href={projects[0].url} target="_blank" rel="noopener noreferrer">Visitar site <span aria-hidden="true">↗</span><span class="sr-only"> (nova aba)</span></a></div>

@@ -15,7 +15,7 @@
 
 ## Implementação local atual
 
-Home e /sites usam a mesma experiência visual. Projetos: Ricardo Tocha, Athena e Mercúrio. Capturas dos sites públicos obtidas em 6 de novembro de 2026; seleção editorial ainda pode ser ajustada. Não atribuir resultados de vendas a essas imagens.
+Home e /sites usam a mesma experiência visual. Projetos: Ricardo Tocha, Athena, Mercúrio, Binary Dimension, Aurazap, Associação Novos Caminhos, IBREP, Anacã Música e Estúdio Anacã. Ricardo solicitou os seis novos projetos em 10 de novembro de 2026. Capturas dos três primeiros obtidas em 6 de novembro; dos seis adicionais, em 10 de novembro, nas respectivas páginas públicas. A abertura mantém três destaques e a seção de trabalhos permite selecionar os nove projetos, com nome, descrição, imagem e link. O seletor usa três colunas no desktop e duas no celular. A base para assistentes recebe o mesmo catálogo. Não atribuir resultados de vendas a essas imagens.
 
 A base está em src/data/knowledge.ts e src/data/offer.ts, com 21 assuntos: oferta, formatos, objetivo, estrutura, conteúdo, design, migração, integrações, tracking, busca, atualização, assistentes, preços, prazos, propriedade, exceções, privacidade, envio e lacunas. Cada assunto distingue direção confirmada, orientação de escopo e condição comercial indefinida. /para-assistentes, /apex-context.json e /llms.txt expõem a mesma base pública, sem respostas de visitantes.
 

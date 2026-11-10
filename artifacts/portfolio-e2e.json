@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-10",
+  "url": "http://127.0.0.1:4321/#trabalhos",
+  "checks": [
+    {
+      "image": "/projects/binary-dimension.jpg",
+      "loaded": true,
+      "name": "Binary Dimension",
+      "selected": 1,
+      "url": "https://bindimension.com/"
+    },
+    {
+      "image": "/projects/aurazap.jpg",
+      "loaded": true,
+      "name": "Aurazap",
+      "selected": 1,
+      "url": "https://aurazap.ia.br/"
+    },
+    {
+      "image": "/projects/novos-caminhos.jpg",
+      "loaded": true,
+      "name": "Associação Novos Caminhos",
+      "selected": 1,
+      "url": "https://associacaonovoscaminhos.com/"
+    },
+    {
+      "image": "/projects/ibrep.jpg",
+      "loaded": true,
+      "name": "IBREP",
+      "selected": 1,
+      "url": "https://ibrep.com.br/"
+    },
+    {
+      "image": "/projects/anaca-musica.jpg",
+      "loaded": true,
+      "name": "Anacã Música",
+      "selected": 1,
+      "url": "https://anacamusica.com.br/"
+    },
+    {
+      "image": "/projects/estudio-anaca.jpg",
+      "loaded": true,
+      "name": "Estúdio Anacã",
+      "selected": 1,
+      "url": "https://estudioanaca.com.br/"
+    }
+  ],
+  "mobile": {
+    "columns": "164.5px 164.5px",
+    "hero": 3,
+    "overflow": false,
+    "projects": 9,
+    "width": 390
+  },
+  "desktop": {
+    "columns": "361.969px 361.969px 361.969px",
+    "hero": 3,
+    "overflow": false,
+    "projects": 9,
+    "width": 1280
+  },
+  "reproduce": [
+    "Abrir o Apex e clicar em Trabalhos.",
+    "Selecionar cada um dos seis novos projetos; conferir nome, imagem carregada, link e seleção única.",
+    "Conferir nove seletores, três destaques na abertura e ausência de rolagem horizontal a 390px e 1280px."
+  ],
+  "screenshots": [
+    "portfolio-mobile.jpg",
+    "portfolio-desktop.jpg"
+  ]
+}
